@@ -27,8 +27,7 @@ Vous devez disposer d'une version fonctionnelle de Python pour utiliser la parti
 
 **Commencez par installer les dépendances nécessaires, pour cela :**
 
-- Option 1 : Ouvrez le notebook "launcher.ipynb" et suivez les instructions des parties 1,2,3 de ce dernier en exécutant ses cellules.
+- Option 1 : Ouvrez le notebook "launcher.ipynb" et suivez les instructions de ce dernier en exécutant ses cellules.
 - Option 2 : Si vous n'êtes pas à l'aise avec les notebooks, il vous suffit d'ouvrir un invite de commande dans ce dossier et de copier/coller les commandes du notebook.
 
-Lorsque toutes les dépendances ont été correctement installées, il suffit de vous rendre dans le dossier de votre choix afin d'en tester les fonctionnalités.\\
-Vous pouvez également suivre certains exemples présents dans le notebook "launcher.ipynb" pour essayer certaines fonctionnalités liées à la detection de plaques ou à la reconnaissance de caractères.
+Lorsque toutes les dépendances ont été correctement installées, il suffit de vous rendre dans le dossier de votre choix afin d'en tester les fonctionnalités.

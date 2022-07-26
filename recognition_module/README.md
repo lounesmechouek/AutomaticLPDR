@@ -13,9 +13,9 @@ Avant d'utiliser ce dossier, vérifiez que vous avez bien ajouté les poids du m
 ## Effectuer une inférence
 En supposant que image.jpg se trouve dans le dossier courant :
 
-'''console
+```console
 "../gtp/Scripts/python.exe" ./mmocr/utils/ocr.py image.jpg --det None --recog SAR --recog-config models/sar_r31_parallel_decoder_alpr.py --recog-ckpt models/recognition_weights.pth --export results
-'''
+```
 
 ## Ré-entraîner le modèle
 1. Si vous souhaitez ré-entraîner le modèle avec notre dataset :
@@ -29,8 +29,8 @@ En supposant que image.jpg se trouve dans le dossier courant :
 ## Tester le modèle
 Les résultats sont obtenus dans le fichier results.pkl
 
-'''console
+```console
 "../gtp/Scripts/python.exe" ./tools/test.py configs/textrecog/sar/sar_r31_parallel_decoder_alpr.py models/recognition_weights.pth --eval acc --out results.pkl
-''''
+```
 
 Afin de visualiser les résultats du test de manière précise, il suffit d'exécuter le notebook **visualize_results.ipynb**
