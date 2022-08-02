@@ -35,6 +35,20 @@ class Photo(db.Model):
             'created_at' : self.created_at
         }
 
+class Format(db.Model):
+    __tablename__ = 'format'
+    id = db.Column(db.Integer, primary_key=True)
+    text_sample = db.Column(db.String(80), nullable=False)
+    country = db.Column(db.String(80) , nullable=False)
+    regex = db.Column(db.String(80), unique=True , nullable=False)
 
-
+    def __repr__(self):
+        return '<Format %r>' % self.country
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'country': self.country,
+            'regex': self.regex,
+            'text_sample': self.text_sample,
+        }
 

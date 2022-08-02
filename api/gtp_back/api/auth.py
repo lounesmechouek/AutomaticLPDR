@@ -83,7 +83,6 @@ def logout():
     }
     return jsonify(response)
 
-
 @bp.route('/all', methods=['GET'])
 def all():
     response = default_response.copy()
