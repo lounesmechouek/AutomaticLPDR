@@ -1,5 +1,4 @@
 from gtp_back.models import ( Format , Photo , Plate )
-from gtp_back import db
 from flask import (
     Flask, Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
 )
@@ -9,6 +8,8 @@ from flask_jwt_extended import (
 )
 
 from gtp_back import db
+
+# TODO : review the jwt access for certain endpoints
 
 bp = Blueprint('others', __name__, url_prefix='/api/others')
 
@@ -22,7 +23,7 @@ default_response = {
 def addPhoto():
     response = default_response.copy()
     if request.method == 'POST' :
-        file_name_link = request.form['file_name_link']
+        file_name_link = request.json['file_name_link']
         if not file_name_link:
             response['error'] = 'file link is required.'
 
@@ -55,9 +56,9 @@ def allPhotos():
 def addFormat():
     response = default_response.copy()
     if request.method == 'POST' :
-        country = request.form['country']
-        text_sample = request.form['text_sample']
-        regex = request.form['regex']
+        country = request.json['country']
+        text_sample = request.json['text_sample']
+        regex = request.json['regex']
         if not country or not regex:
             response['error'] = 'country | regex is required.'
 
@@ -111,6 +112,8 @@ def addPlate():
         if not Format.query.filter_by(id=format_id).first() :
             response['error'] = 'format doesnt exist.'
 
+        # TODO : Check if regex is respected
+
         if response['error'] is None:
             try:
                 db.session.add(Plate(text_plate=text_plate,format_id=format_id))
@@ -130,7 +133,7 @@ def allPlates():
     response = default_response.copy()
     if request.method == 'GET':
         response = {
-            'formats' : [e.serialize() for e in Plate.query.order_by(Plate.id).all()] , 
+            'plates' : [e.serialize() for e in Plate.query.order_by(Plate.id).all()] , 
             'success' : True,
             'message' : "List of Plates"
         }
@@ -144,6 +147,7 @@ def getPlatebyId(id :int):
         response = {
             'success' : True,
             'message' : "Plate",
-            'format' : Plate.query.filter_by(id=id).first().serialize()
+            'plate' : Plate.query.filter_by(id=id).first().serialize()
         }
     return jsonify(response)
+

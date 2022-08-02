@@ -52,6 +52,10 @@ def create_app(test_config=None):
     #add auth apis
     from .api import auth
     app.register_blueprint(auth.bp)
+    
+    #add scan apis
+    from .api import scan
+    app.register_blueprint(scan.bp)
 
     #add others apis
     from .api import others

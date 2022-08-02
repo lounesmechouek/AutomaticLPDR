@@ -1,5 +1,4 @@
 import datetime
-from enum import unique
 from gtp_back import db
 
 class User(db.Model):
@@ -70,4 +69,27 @@ class Plate(db.Model):
             'flagged': self.flagged,
             'note': self.note,
             'format_id': self.format_id
+        }
+
+class Scan(db.Model):
+    __tablename__ = 'scan'
+    id = db.Column(db.Integer, primary_key=True)
+    accuracy = db.Column(db.Float, default=0 ,nullable=False) 
+    is_deleted = db.Column(db.Boolean,default=False, nullable=False)
+    created_at = db.Column(db.DateTime,default=datetime.datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    photo_id = db.Column(db.Integer, db.ForeignKey('photo.id'))
+    plate_id = db.Column(db.Integer, db.ForeignKey('plate.id'),nullable=True)
+
+    def __repr__(self):
+        return '<Scan %r>' % self.country
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'accuracy': self.accuracy,
+            'deleted': self.is_deleted,
+            'created_at': self.created_at,
+            'user_id': self.user_id,
+            'photo_id': self.photo_id,
+            'plate_id': self.plate_id
         }

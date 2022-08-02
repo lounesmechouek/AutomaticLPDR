@@ -8,6 +8,7 @@ from flask_jwt_extended import (
     create_access_token, get_jwt_identity, jwt_required, JWTManager
 )
 
+# TODO : Make the error handling better 
 
 from gtp_back.models import User
 from gtp_back import db
@@ -24,8 +25,8 @@ default_response = {
 def register():
     response = default_response.copy()
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.json['username']
+        password = request.json['password']
 
         if not username:
             response['error'] = 'Username is required.'
@@ -50,8 +51,8 @@ def register():
 def login():
     response = default_response.copy()
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.json['username']
+        password = request.json['password']
         response['user'] = User.query.filter_by(username=username).first()
         if response['user'] is None:
             response['error']  = 'Incorrect username.'
@@ -71,16 +72,15 @@ def login():
 
     return jsonify(response)
 
-@bp.route('/logout', methods = ['POST'])
-@jwt_required()
-def logout():
-    response = default_response.copy()
-    session.clear()
-    response = {
-        'success' : True ,
-        'message'  : "Logged out"
-    }
-    return jsonify(response)
+# @bp.route('/logout', methods = ['POST'])
+# @jwt_required()
+# def logout():
+#     response = default_response.copy()
+#     response = {
+#         'success' : True ,
+#         'message'  : "Logged out"
+#     }
+#     return jsonify(response)
 
 @bp.route('/all', methods=['GET'])
 def all():
