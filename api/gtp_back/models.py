@@ -1,4 +1,5 @@
 import datetime
+from enum import unique
 from gtp_back import db
 
 class User(db.Model):
@@ -52,3 +53,21 @@ class Format(db.Model):
             'text_sample': self.text_sample,
         }
 
+class Plate(db.Model):
+    __tablename__ = 'plate'
+    id = db.Column(db.Integer, primary_key=True)
+    text_plate = db.Column(db.String(80), unique= True , nullable=False)
+    note = db.Column(db.String(255), default = "" ,nullable = True )
+    flagged = db.Column(db.Boolean,default=False, nullable=False) 
+    format_id = db.Column(db.Integer, db.ForeignKey('format.id'))
+
+    def __repr__(self):
+        return '<Plate %r>' % self.country
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'text_plate': self.text_plate,
+            'flagged': self.flagged,
+            'note': self.note,
+            'format_id': self.format_id
+        }

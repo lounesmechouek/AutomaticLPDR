@@ -13,6 +13,7 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     
+    # TODO : this to be moved to the config file config.cfg
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gtp.db' 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["JWT_SECRET_KEY"] = "pfe-gtp"  
@@ -31,19 +32,22 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.before_first_request
-    def create_tables():
-        db.create_all()
-    # a simple page that says hello
+    # to verify if server is UP
     @app.route('/')
     def home():
         object = {
-            "message" : "home"
+            "success" : True,
+            "message" : "Server is UP !"
         }
         return jsonify(object)
 
     #init our db
     db.init_app(app)
+
+    #Making sure we have tables created following the models
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
 
     #add auth apis
     from .api import auth

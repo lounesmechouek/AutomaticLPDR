@@ -62,9 +62,8 @@ def login():
             }
 
         if response['error'] is None:
-            #this for conveting th type sqlite3.row to jsonify
             response = {
-                # 'user' : dict(zip(response['user'].keys(), response['user'])), 
+                'user' : response['user'].serialize(), 
                 'success' : True,
                 'message' : "Logged in",
                 'token' : create_access_token(identity=response['user'].id)

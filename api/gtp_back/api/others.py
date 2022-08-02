@@ -1,4 +1,4 @@
-from gtp_back.models import ( Format , Photo  )
+from gtp_back.models import ( Format , Photo , Plate )
 from gtp_back import db
 from flask import (
     Flask, Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
@@ -75,6 +75,17 @@ def addFormat():
     return jsonify(response)
 
 
+@bp.route('/format/<int:id>', methods=['GET'])
+def getFormatbyId(id :int):
+    response = default_response.copy()
+    if request.method == 'GET':
+        response = {
+            'format' : Format.query.filter_by(id=id).first().serialize(), 
+            'success' : True,
+            'message' : "Format"
+        }
+    return jsonify(response)
+
 @bp.route('/formats', methods=['GET'])
 def allFormats():
     response = default_response.copy()
@@ -83,5 +94,56 @@ def allFormats():
             'formats' : [e.serialize() for e in Format.query.order_by(Format.id).all()] , 
             'success' : True,
             'message' : "List of formats"
+        }
+    return jsonify(response)
+
+
+@bp.route('/plate/add', methods=['POST'])
+def addPlate():
+    response = default_response.copy()
+    if request.method == 'POST' :
+        text_plate = request.json['text_plate']
+        format_id = request.json['format_id']
+
+        if not text_plate or not format_id:
+            response['error'] = 'text_plate | format_id is required.'
+
+        if not Format.query.filter_by(id=format_id).first() :
+            response['error'] = 'format doesnt exist.'
+
+        if response['error'] is None:
+            try:
+                db.session.add(Plate(text_plate=text_plate,format_id=format_id))
+                db.session.commit()
+                response = {
+                    'message' : "Plate added successfully",
+                    'success' : True
+                }
+            except :
+                response['error'] = f"Plate {text_plate} already exists."
+
+    return jsonify(response)
+
+
+@bp.route('/plates', methods=['GET'])
+def allPlates():
+    response = default_response.copy()
+    if request.method == 'GET':
+        response = {
+            'formats' : [e.serialize() for e in Plate.query.order_by(Plate.id).all()] , 
+            'success' : True,
+            'message' : "List of Plates"
+        }
+    return jsonify(response)
+
+
+@bp.route('/plate/<int:id>', methods=['GET'])
+def getPlatebyId(id :int):
+    response = default_response.copy()
+    if request.method == 'GET':
+        response = {
+            'success' : True,
+            'message' : "Plate",
+            'format' : Plate.query.filter_by(id=id).first().serialize()
         }
     return jsonify(response)
