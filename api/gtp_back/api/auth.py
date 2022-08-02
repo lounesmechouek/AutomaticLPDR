@@ -1,17 +1,17 @@
-import functools
-
+from gtp_back.models import User
+from gtp_back import db
 from flask import (
     Flask, Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from flask_jwt_extended import ( 
     create_access_token, get_jwt_identity, jwt_required, JWTManager
 )
 
-from gtp_back.db import get_db
 
-app = Flask(__name__)
+from gtp_back.models import User
+from gtp_back import db
+
 bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 default_response = { 
@@ -22,27 +22,25 @@ default_response = {
 
 @bp.route('/register', methods=['POST'])
 def register():
-    db = get_db()
     response = default_response.copy()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
         if not username:
-            response.error = 'Username is required.'
+            response['error'] = 'Username is required.'
         elif not password:
-            response.error = 'Password is required.'
+            response['error'] = 'Password is required.'
 
         if response['error'] is None:
             try:
-                db.execute(
-                    "INSERT INTO user (username, hsh_passwd) VALUES (?, ?)",
-                    (username, generate_password_hash(password))
-                )
-                db.commit()
-                response['message'] = "User registered successfully"
-                response['success'] = True
-            except db.IntegrityError:
+                db.session.add(User(username=username,hsh_password=generate_password_hash(password)))
+                db.session.commit()
+                response = {
+                    'message' : "User registered successfully",
+                    'success' : True
+                }
+            except :
                 response['error'] = f"User {username} is already registered."
 
     return jsonify(response)
@@ -50,28 +48,27 @@ def register():
     
 @bp.route('/login', methods=['POST'])
 def login():
-    db = get_db()
     response = default_response.copy()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        response['user'] = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
-        ).fetchone()
-        if response['user']  is None:
+        response['user'] = User.query.filter_by(username=username).first()
+        if response['user'] is None:
             response['error']  = 'Incorrect username.'
-        elif not check_password_hash(response['user']['hsh_passwd'], password):
-            response['user'] = None
-            response['error'] = 'Incorrect password.'
+        elif not check_password_hash(response['user'].hsh_password, password):
+            response = {
+                'user' : None,
+                'error' : 'Incorrect password.'
+            }
 
         if response['error'] is None:
             #this for conveting th type sqlite3.row to jsonify
-            response['user'] = dict(zip(response['user'].keys(), response['user'])) 
-            session.clear()
-            response['success'] = True
-            response['message'] = "Logged in"
-            response['token'] = create_access_token(identity=response['user'])
-            session['token'] = response['token']
+            response = {
+                # 'user' : dict(zip(response['user'].keys(), response['user'])), 
+                'success' : True,
+                'message' : "Logged in",
+                'token' : create_access_token(identity=response['user'].id)
+            }
 
     return jsonify(response)
 
@@ -80,6 +77,20 @@ def login():
 def logout():
     response = default_response.copy()
     session.clear()
-    response.success = True
-    response.message = "Logged out"
+    response = {
+        'success' : True ,
+        'message'  : "Logged out"
+    }
+    return jsonify(response)
+
+
+@bp.route('/all', methods=['GET'])
+def all():
+    response = default_response.copy()
+    if request.method == 'GET':
+        response = {
+            'users' : [e.serialize() for e in User.query.order_by(User.username).all()] , 
+            'success' : True,
+            'message' : "List of users"
+        }
     return jsonify(response)

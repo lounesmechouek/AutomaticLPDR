@@ -5,15 +5,16 @@ from flask import jsonify
 from flask_jwt_extended import ( 
     create_access_token, get_jwt_identity, jwt_required, JWTManager
 )
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-    )
     
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gtp.db' 
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["JWT_SECRET_KEY"] = "pfe-gtp"  
     jwt = JWTManager(app)
 
@@ -30,6 +31,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
     # a simple page that says hello
     @app.route('/')
     def home():
@@ -38,13 +42,15 @@ def create_app(test_config=None):
         }
         return jsonify(object)
 
-
     #init our db
-    from . import db
     db.init_app(app)
 
-    #add auth
+    #add auth apis
     from .api import auth
     app.register_blueprint(auth.bp)
+
+    #add others apis
+    from .api import others
+    app.register_blueprint(others.bp)
 
     return app
