@@ -1,3 +1,4 @@
+from gtp_back.api.others import addPhoto
 from gtp_back.functions import make_response
 from gtp_back.models import ( Format , Photo , Plate , Scan )
 from flask import (
@@ -40,10 +41,41 @@ def getFormatbyId(id :int):
     except : 
         return make_response(False)
 
-# Save new scan
-# Retreive the format id from country Name
-# Looking if the plate already exists or create a new row
-# Adding the new photo
-
-# @bp.route('/save', methods=['POST'])
-# def saveScan():
+@bp.route('/save', methods=['POST'])
+@jwt_required()
+def saveScan():
+    data = request.json
+    user = get_jwt_identity()
+    try :
+        format =  Format.query.filter_by(country=data['country']).first()
+        if not format :
+            return make_response(False,error = 'Country Format doesnt exist.')
+        # save the picture
+        try : 
+            photo = Photo(
+                file_name_link= data['file_name_link'],
+                longitude = data['longitude'],
+                latitude = data['latitude']
+            )
+            db.session.add(photo)
+            
+            #get the plate or create new one
+            plate = Plate.query.filter_by(text_plate=data['text_plate']).first()  
+            if plate is None :
+                plate = Plate(text_plate = data['text_plate'],format_id=format.id)
+                db.session.add(plate)   
+            db.session.flush()
+            # save the new scan 
+            scan = Scan(
+                    accuracy=data['accuracy'],
+                    user_id = user['id'],
+                    plate_id = plate.id,
+                    photo_id = photo.id
+                )
+            db.session.add(scan)
+            db.session.commit()
+            return make_response(True,scan.serialize(),"Scan saved successfully !")
+        except :   
+            return make_response(False,error = "Photo already scanned" )
+    except :
+        return make_response(False,error = "Invalid request" )

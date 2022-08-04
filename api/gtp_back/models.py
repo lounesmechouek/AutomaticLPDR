@@ -66,7 +66,6 @@ class Plate(db.Model):
             'id': self.id, 
             'text_plate': self.text_plate,
             'flagged': self.flagged,
-            'note': self.note,
             'format_id': self.format_id
         }
 
