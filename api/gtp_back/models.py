@@ -39,8 +39,8 @@ class Format(db.Model):
     __tablename__ = 'format'
     id = db.Column(db.Integer, primary_key=True)
     text_sample = db.Column(db.String(80), nullable=False)
-    country = db.Column(db.String(80) , nullable=False)
-    regex = db.Column(db.String(80), unique=True , nullable=False)
+    country = db.Column(db.String(80), unique=True , nullable=False)
+    regex = db.Column(db.String(80) , nullable=False)
 
     def __repr__(self):
         return '<Format %r>' % self.country
@@ -56,7 +56,6 @@ class Plate(db.Model):
     __tablename__ = 'plate'
     id = db.Column(db.Integer, primary_key=True)
     text_plate = db.Column(db.String(80), unique= True , nullable=False)
-    note = db.Column(db.String(255), default = "" ,nullable = True )
     flagged = db.Column(db.Boolean,default=False, nullable=False) 
     format_id = db.Column(db.Integer, db.ForeignKey('format.id'))
 
@@ -78,8 +77,9 @@ class Scan(db.Model):
     is_deleted = db.Column(db.Boolean,default=False, nullable=False)
     created_at = db.Column(db.DateTime,default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    photo_id = db.Column(db.Integer, db.ForeignKey('photo.id'))
+    photo_id = db.Column(db.Integer ,db.ForeignKey('photo.id'),unique= True)
     plate_id = db.Column(db.Integer, db.ForeignKey('plate.id'),nullable=True)
+    note = db.Column(db.String(255), default = "" ,nullable = True )
 
     def __repr__(self):
         return '<Scan %r>' % self.country
@@ -91,5 +91,6 @@ class Scan(db.Model):
             'created_at': self.created_at,
             'user_id': self.user_id,
             'photo_id': self.photo_id,
-            'plate_id': self.plate_id
+            'plate_id': self.plate_id,
+            'note' : self.note
         }

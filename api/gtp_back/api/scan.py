@@ -1,3 +1,4 @@
+from gtp_back.functions import make_response
 from gtp_back.models import ( Format , Photo , Plate , Scan )
 from flask import (
     Flask, Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
@@ -10,55 +11,39 @@ from gtp_back import db
 
 bp = Blueprint('scan', __name__, url_prefix='/api/scan')
 
-default_response = { 
-        "error" : None,
-        "message" : "Failed",
-        "success" : False
-    }
-
 @bp.route('/all', methods=['GET'])
 def allPlates():
-    response = default_response.copy()
-    if request.method == 'GET':
-        response = {
-            'Scans' : [e.serialize() for e in Scan.query.filter_by(is_deleted=False).order_by(Scan.id).all()] , 
-            'success' : True,
-            'message' : "List of Scans"
-        }
-    return jsonify(response)
+    return make_response(
+        True,
+        [e.serialize() for e in Scan.query.filter_by(is_deleted=False).order_by(Scan.id).all()],
+            "List of Scans"
+        )
 
 @bp.route('/add', methods=['POST'])
 def addScan():
-    response = default_response.copy()
-    if request.method == 'POST':
-        data = request.json
-        if response['error'] is None:
-            try:
-                db.session.add(Scan(**data))
-                db.session.commit()
-                response = {
-                    'message' : "Scan added successfully",
-                    'success' : True
-                }
-            except :
-                response['error'] = f"Scan already exists."
+    data = request.json
+    try:
+        db.session.add(Scan(**data))
+        db.session.commit()
+        return make_response(True,data,"Scan added successfully")
+    except :
+        return make_response(False,error = "Scan already exists.")
 
-    return jsonify(response)
 
 @bp.route('/delete/<int:id>', methods=['DELETE'])
 def getFormatbyId(id :int):
-    response = default_response.copy()
-    if request.method == 'DELETE':
-        try :
-            scan = Scan.query.filter_by(id=id).first()
-            scan.is_deleted= True
-            db.session.commit()
-            response = {
-            'scan' : scan.serialize(), 
-            'success' : True,
-            'message' : "Deleted Successfully"
-        }
-        except : 
-            response['error'] = "something bad happened"
+    try :
+        scan = Scan.query.filter_by(id=id).first()
+        scan.is_deleted= True
+        db.session.commit()
+        return make_response(True,scan.serialize(),"Scan deleted Successfully")
+    except : 
+        return make_response(False)
 
-    return jsonify(response)
+# Save new scan
+# Retreive the format id from country Name
+# Looking if the plate already exists or create a new row
+# Adding the new photo
+
+# @bp.route('/save', methods=['POST'])
+# def saveScan():
