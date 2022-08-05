@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 
 from flask import Flask
@@ -17,6 +18,8 @@ def create_app(test_config=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gtp.db' 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["JWT_SECRET_KEY"] = "pfe-gtp"  
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
     jwt = JWTManager(app)
 
     if test_config is None:
@@ -56,6 +59,10 @@ def create_app(test_config=None):
     #add scan apis
     from .api import scan
     app.register_blueprint(scan.bp)
+    
+    #add plate apis
+    from .api import plate
+    app.register_blueprint(plate.bp)
 
     #add others apis
     from .api import others

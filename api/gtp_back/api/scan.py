@@ -79,3 +79,14 @@ def saveScan():
             return make_response(False,error = "Photo already scanned" )
     except :
         return make_response(False,error = "Invalid request" )
+
+@bp.route('/note/<int:id>', methods=['PATCH'])
+@jwt_required()
+def flagPlateById(id :int):
+    try :
+        scan = Scan.query.filter_by(id=id).first()
+        scan.note= request.json['note']
+        db.session.commit()
+        return make_response(True,scan.serialize(),"Note Added Successfully")
+    except : 
+        return make_response(False)
