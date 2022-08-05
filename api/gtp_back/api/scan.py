@@ -8,12 +8,14 @@ from flask_jwt_extended import (
     create_access_token, get_jwt_identity, jwt_required, JWTManager
 )
 
+#TODO : Add Admin verification for certain routes
+
 from gtp_back import db
 
 bp = Blueprint('scan', __name__, url_prefix='/api/scan')
 
 @bp.route('/all', methods=['GET'])
-def allPlates():
+def allScans():
     return make_response(
         True,
         [e.serialize() for e in Scan.query.filter_by(is_deleted=False).order_by(Scan.id).all()],
@@ -32,7 +34,7 @@ def addScan():
 
 
 @bp.route('/delete/<int:id>', methods=['DELETE'])
-def getFormatbyId(id :int):
+def deleteScanById(id :int):
     try :
         scan = Scan.query.filter_by(id=id).first()
         scan.is_deleted= True

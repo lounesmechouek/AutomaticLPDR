@@ -60,6 +60,10 @@ def create_app(test_config=None):
     from .api import scan
     app.register_blueprint(scan.bp)
     
+    #add user apis
+    from .api import user
+    app.register_blueprint(user.bp)
+
     #add plate apis
     from .api import plate
     app.register_blueprint(plate.bp)
