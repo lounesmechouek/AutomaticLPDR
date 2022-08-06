@@ -27,23 +27,41 @@ def deleteScanById(id :int):
     except : 
         return make_response(False)
 
-# @bp.route('/scans', methods=['GET'])
-# @jwt_required()
-# def allUserScans():
-#     # try :
-#         user = get_jwt_identity()
-#         return make_response(
-#             True, #  and Scan.user_id==user['id'] and Scan.is_deleted==False
-#             [e.serialize() for e in db.session.query(Scan).join(Plate).filter(Plate.id == Scan.plate_id).order_by(Scan.created_at).all()],
-#             "List of Scans"
-#             )
-#     # except :
-#     #     return make_response(False)
+
+# TODO : make it return only one scan of the distinct plate 
+@bp.route('/scans', methods=['GET'])
+@jwt_required()
+def allUserScans():
+    try :
+        user = get_jwt_identity()
+        return make_response(
+            True,
+            [e.serialize() for e in Scan.query
+            .distinct(Scan.plate_id)
+            .filter(Scan.user_id==user['id'])
+            .filter(Scan.is_deleted==False)
+            .order_by(Scan.created_at)
+            ],
+            "List of Scans"
+            )
+    except :
+        return make_response(False)
 
 @bp.route('/scan/<int:id>/photos', methods=['GET'])
+@jwt_required()
 def allScans(id : int):
-    return make_response(
-        True,
-        [e.serialize() for e in Photo.query.join(Scan).filter(Scan.photo_id == Photo.id).order_by(Photo.created_at).all()],
-        "List of Photos"
-        )
+    try :
+        user = get_jwt_identity()
+        return make_response(
+            True,
+            [e.serialize() for e in Photo.query.join(Scan)
+            .filter(Scan.photo_id == Photo.id)
+            .filter(Scan.is_deleted == False)
+            .filter(Scan.user_id == user['id'])
+            .order_by(Photo.created_at)
+            .all()],
+            "List of Photos"
+            )
+    except : 
+        return make_response(False)
+    

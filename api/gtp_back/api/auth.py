@@ -32,7 +32,15 @@ def register():
         return make_response(False,error = "Invalid request" )
 
 
-    
+@bp.route('/verif', methods=['POST'])
+def verifLogged():
+    try :
+        verify_jwt_in_request()
+        return make_response(True,get_jwt(),"Token still valid")
+    except :
+        return make_response(False,error = "No Token or expired" )
+
+
 @bp.route('/login', methods=['POST'])
 def login():
     try :
