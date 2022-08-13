@@ -1,10 +1,12 @@
-import os
-
+import os, shutil
 from numpy import result_type
 from flask import Flask, request, redirect, send_file, abort, jsonify
+import json
 from werkzeug.utils import secure_filename, send_from_directory
 import subprocess
 import shutil
+import urllib.request
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -19,6 +21,13 @@ APP_DIR = os.path.dirname(app.instance_path) + '/'
 MEDIA_DIR = os.path.join(os.path.dirname(app.instance_path), 'media/')
 DETECTION_DIR = os.path.join(ROOT_DIR, 'detection_module/')
 RECOGNITION_DIR = os.path.join(ROOT_DIR, 'recognition_module/')
+
+SAVING_FOLDERS = [
+    os.path.join(MEDIA_DIR, 'plaques'),
+    os.path.join(MEDIA_DIR, 'voitures'),
+    os.path.join(APP_DIR, 'results_detection'),
+    os.path.join(APP_DIR, 'results_recognition')
+]
 
 # Champs 3 et 14 à remplir dynamiquement dans la requête
 detect_props = [
@@ -67,7 +76,7 @@ def make_prediction(model_type, infos, args, dismiss=False):
     dismiss: Si à True, durant la reconnaissance, l'image n'est pas copiée dans le répertoire "plaques"
 
     return :
-        0 : erreur liée au arguments fournis
+        0 : erreur liée aux arguments fournis
         1 : erreur liée au modèle
         2 : erreur liée au fichier (manquant)
         String : congratulations !
@@ -77,7 +86,13 @@ def make_prediction(model_type, infos, args, dismiss=False):
 
     if model_type == 'detection':
         tab_arguments = detect_props
-        infos['img'].save(os.path.join(MEDIA_DIR, 'voitures/'+infos['filename']))
+        try:
+            # On load l'image depuis le lien fourni
+            urllib.request.urlretrieve(infos['img'], os.path.join(MEDIA_DIR, 'voitures/'+infos['filename']))
+
+        except Exception:
+            # Le fichier fourni est introuvable
+            return 0
         result_path = os.path.join(
             APP_DIR, 
             #'results_detection/'+infos['filename'].split('.')[0]+'/'+infos['filename']
@@ -86,7 +101,14 @@ def make_prediction(model_type, infos, args, dismiss=False):
     elif model_type == 'reconnaissance':
         tab_arguments = recog_props
         if dismiss is False:
-            infos['img'].save(os.path.join(MEDIA_DIR, 'plaques/'+infos['filename']))
+            try :
+                # Si dismiss est à faux, donc on demande une reconnaissance sans détection
+                # On récupère l'image de plaque depuis le lien fourni :
+                urllib.request.urlretrieve(infos['img'], os.path.join(MEDIA_DIR, 'plaques/'+infos['filename']))
+                #infos['img'].save(os.path.join(MEDIA_DIR, 'plaques/'+infos['filename']))
+            except Exception:
+                # Le fichier fourni est introuvable
+                return 0
         names = infos['filename'].split('.')
         result_path = os.path.join(
             APP_DIR,
@@ -101,12 +123,12 @@ def make_prediction(model_type, infos, args, dismiss=False):
     
     # Dans le cas où une erreur ait eu lieu durant l'inférence :
     try:
-        subprocess.run(tab_arguments)
-    except Exception:
+        subprocess.check_output(tab_arguments)
+    except:
         return 1
     
-    # Dans le cas où le fichier résultat ne se serait pas correctement enregistré :
-    if not os.path.exists(result_path) or result_type == '':
+    # Dans le cas où le fichier résultant ne se serait pas correctement enregistré :
+    if not os.path.exists(result_path) or result_path == '':
         return 2
 
     # Tout est ok
@@ -128,6 +150,19 @@ def handle_returns(path):
     else:
         return True
 
+def clean_folders():
+    pth = ''
+    for folder in SAVING_FOLDERS:
+        for filename in os.listdir(folder):
+            pth = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(pth) or os.path.islink(pth):
+                os.unlink(pth)
+            elif os.path.isdir(pth):
+                shutil.rmtree(pth)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (pth, e))
+
 ### Error handlers
 @app.errorhandler(404)
 def resource_not_found(e):
@@ -142,16 +177,18 @@ def model_error(e):
     return jsonify(error=str(e)), 501
 
 ### detection route
-# Couvre le cas où le client souhaite faire une detection d'ojet  sans OCR
+# Couvre le cas où le client souhaite faire une detection d'objet  sans OCR
 @app.route('/makedetection', methods=['POST'])
 def makedetection():
     if request.method == "POST":
+        clean_folders()
         # On récupère le corps de la requête et on vérifie les entrées
         filename = ''
         img = ''
         try:
-            filename = secure_filename(request.form['filename'])
-            img = request.files['img']
+            content = request.json
+            filename = secure_filename(content['filename'])
+            img = content['img']
             if check_form_inputs(filename, img) == False:
                 raise(Exception)
         except Exception:
@@ -169,7 +206,9 @@ def makedetection():
             abort(500, description="Wrong http request type.")
 
         if handle_returns(result_path) is True:
-            return send_file(result_path, as_attachment=True) 
+            result = Image.open(result_path)
+            clean_folders()
+            return send_file(result, as_attachment=True) 
     else:
         abort(500, description="Wrong http request type.")
 
@@ -178,12 +217,14 @@ def makedetection():
 @app.route('/makerecognition', methods=['POST'])
 def makerecognition():
     if request.method == "POST":
+        clean_folders()
         # On récupère le corps de la requête et on vérifie les entrées
         filename = ''
         img = ''
         try:
-            filename = secure_filename(request.form['filename'])
-            img = request.files['img']
+            content = request.json
+            filename = secure_filename(content['filename'])
+            img = content['img']
             if check_form_inputs(filename, img) == False:
                 raise(Exception)
         except Exception:
@@ -201,7 +242,11 @@ def makerecognition():
             abort(500, description="Wrong http request type.")
 
         if handle_returns(result_path) is True:
-            return send_file(result_path, as_attachment=True) 
+            with open(result_path) as json_file:
+                result = json.load(json_file)
+                clean_folders()
+                return result
+            #return send_file(result_path, as_attachment=True) 
     else:
         abort(500, description="Wrong http request type.")
 
@@ -210,17 +255,19 @@ def makerecognition():
 @app.route('/getplatenumber', methods=['POST'])
 def getplatenumber():
     if request.method == "POST":
+        clean_folders()
         # On récupère le corps de la requête et on vérifie les entrées
         filename = ''
         img = ''
-        try:
-            filename = secure_filename(request.form['filename'])
-            img = request.files['img']
+        try:  
+            content = request.json
+            filename = secure_filename(content['filename'])
+            img = content['img']
             if check_form_inputs(filename, img) == False:
                 raise(Exception)
         except Exception:
             abort(500, description="Wrong arguments. Check the name of the arguments and their format.")
-        
+
         result_path = -1
         try:
             result_path = make_prediction(
@@ -249,6 +296,10 @@ def getplatenumber():
                 abort(500, description="Wrong http request type.")
             
             if handle_returns(new_path) is True:
-                return send_file(result_path, as_attachment=True) 
+                with open(new_path) as json_file:
+                    result = json.load(json_file)
+                    clean_folders()
+                    return result
+                    #return send_file(new_path, as_attachment=True) 
     else:
         abort(500, description="Wrong http request type.")
