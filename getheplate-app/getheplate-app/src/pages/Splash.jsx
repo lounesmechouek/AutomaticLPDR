@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View ,Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View ,Button ,Image } from 'react-native';
+import Svg from 'react-native-svg-uri';
+import Style from '../styles'
+const Splash = ({ navigation }) => {
 
-const Splash = () => {
-  return (
-    <View style={styles.container}>
-        <Text>Hey you !</Text>
-        <Button title="Click here"/>
-        <StatusBar style="auto" />
-    </View>
-  )
+    useEffect(() => {
+      setTimeout(()=>navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+        }),1000)
+      // TODO: here api call to verify session before navigation
+    })
+    
+    return (
+        <View style={Style.container}>
+            <StatusBar style="auto" />
+            <Svg
+                source={require('../assets/svg/10.svg')}
+                style={{ heigth: "200px"}}
+            />
+            <Text
+                style={{
+                    fontFamily: 'Quantico',
+                    fontSize : "20px"
+                }}
+                onPress={() => navigation.navigate('Login')}
+                    
+            >GET THE PLATE</Text>
+        </View>
+    )
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
-
   
 export default Splash

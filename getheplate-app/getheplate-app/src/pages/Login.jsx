@@ -1,7 +1,16 @@
-import React from 'react'
+import React ,{ useEffect } from 'react'
+import { StyleSheet, Text, TextInput, View ,Button ,Image } from 'react-native';
+import Style from '../styles'
 
-export const Login = () => {
+const Login = ({ navigation }) => {
+  
   return (
-    <div>Login</div>
+    <View style={Style.container} >
+      <Text>
+        Login Page
+      </Text>
+    </View>
   )
 }
+
+export default Login
