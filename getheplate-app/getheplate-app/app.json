@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "getheplate-app",
+    "slug": "gettheplate-app",
+    "owner" : "badido",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
