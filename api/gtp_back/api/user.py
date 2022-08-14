@@ -37,10 +37,10 @@ def allUserScans():
         return make_response(
             True,
             [e.serialize() for e in Scan.query
-            .distinct(Scan.plate_id)
             .filter(Scan.user_id==user['id'])
             .filter(Scan.is_deleted==False)
             .order_by(Scan.created_at)
+            .distinct(Scan.plate_id)
             ],
             "List of Scans"
             )
