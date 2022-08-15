@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View ,Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Splash from './src/pages/Splash';
 import { useFonts } from 'expo-font';
+import Splash from './src/pages/Splash';
 import  Login  from './src/pages/Login';
 
 const Stack = createStackNavigator()
