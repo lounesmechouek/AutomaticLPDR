@@ -10,12 +10,19 @@ const strings = {
             password : "Mot de passe"
         },
         button : {
-            login : "Se connecter"
+            login : "Se connecter",
+            newScan : "Faire un nouveau scan",
+            cancel : "Annuler",
+            getFromGallery : "Importer depuis la galerie",
+            takePhoto : "Prendre une photo"
         },
         home : {
             youPlates : "Vos Plaques",
             precision : "Précision",
             took_at : "Prise"
+        },
+        addScan : {
+            option : "Veuillez selectionner l’une des options suivantes"
         }
     }
 }

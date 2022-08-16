@@ -1,8 +1,21 @@
 import React from 'react'
+import { StyleSheet, Text, TextInput, View ,Button ,Image, Keyboard, TouchableHighlight } from 'react-native';
+import Svg from 'react-native-svg-uri'
+import Style from '../styles'
 
-const FloatingButton = () => {
+const FloatingButton = (props) => {
   return (
-    <div>FloatingButton</div>
+    <TouchableHighlight  {...props} >
+      <View style={[Style.floating_button_ctn,Style.shadowProp]} >
+        <Svg 
+          source={require('../assets/svg/7.svg')}
+          style={Style.floating_button_icon}
+        />
+        <Text style={Style.floating_button_txt}>
+            {props.title}
+        </Text>
+      </View>
+    </TouchableHighlight> 
   )
 }
 

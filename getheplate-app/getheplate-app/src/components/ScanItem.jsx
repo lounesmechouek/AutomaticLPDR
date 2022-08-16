@@ -16,15 +16,14 @@ const ScanItem = ({ scan , navigation } ) => {
     <TouchableOpacity onPress={goToScanPage}>
         <View style={[Style.scanCard,Style.shadowProp]} >
             <Text style={Style.plateTxt}>{scan.plate_text}</Text>
-            <Text style={Style.scanItemTexts}>{Strings.home.precision} {scan.accuracy}</Text>
+            <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{scan.accuracy}</Text></Text>
             <Text style={Style.scanItemTexts}>{Strings.home.took_at} {scan.created_at}</Text>
             <Svg
                 source={require('../assets/svg/8.svg')}
                 style={{ 
-                    alignSelf : "right",
-                    marginLeft : "auto",
-                    marginRight : "10%",
-                    marginVertical : "5%"
+                    position : "absolute",
+                    right : "5%",
+                    bottom : '10%'
                 }}
                 fill = {scan.is_flagged ? Colors.red : null}
             />

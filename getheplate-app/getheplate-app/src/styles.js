@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
     },
     shadowProp: {
       shadowColor: '#171717',
-      shadowOffset: {width: -1, height: 4},
-      shadowOpacity: 0.2,
-      shadowRadius: 3,
+      shadowOffset: {width: 1, height: 10},
+      shadowOpacity: 0.1,
+      shadowRadius: 10,
     },
     formHolder :{
       backgroundColor : Colors.grey,
@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
       flex:1,
       alignItems: 'center',
       justifyContent: 'center',
-      marginVertical : '5%',
+      marginVertical : '3%',
+      marginHorizontal : "5%",
       minWidth : "90%",
       minHeight : "30%",
       borderRadius : "20px",
@@ -90,22 +91,23 @@ const styles = StyleSheet.create({
       backgroundColor : Colors.white
     },
     plateTxt :{
-      borderRadius : "5%",
+      borderRadius : "10%",
       paddingHorizontal : "2%",
       fontFamily: 'QuanticoB',
       alignSelf : "left",
       marginVertical : '5%',
-      marginHorizontal : "7%",
+      marginHorizontal : "5%",
       color : Colors.black ,
       borderColor : Colors.light_grey,
       borderWidth : "5%",
-      fontSize : "20px",
+      fontSize : "22px",
     },
     scanItemTexts:{
       alignSelf :"left",
       fontFamily: 'Quantico',
       marginHorizontal : "7%",
-      fontSize : "12px"
+      fontSize : "12px",
+      marginBottom : "5%",
     },
     titlePageTxt : {
       fontFamily: 'QuanticoB',
@@ -114,6 +116,29 @@ const styles = StyleSheet.create({
       marginVertical : "5%",
       color : Colors.black ,
       fontSize : "24px"
+    },
+    floating_button_ctn :{
+      alignItems: "center",
+      position : 'fixed',
+      bottom : 0,
+      left : 0,
+      flexDirection:'row',
+      minWidth : "90%",
+      maxHeight : 100,
+      padding: "4%",
+      color : Colors.white,
+      backgroundColor : Colors.dark_grey,
+      borderRadius : "20%"
+    },
+    floating_button_icon : { 
+      marginLeft: 0,
+      marginRight : "auto"
+    },
+    floating_button_txt :{
+      fontFamily: 'Quantico',
+      color : Colors.white,
+      fontSize : "18px",
+      marginRight : "auto"
     }
     
   });
