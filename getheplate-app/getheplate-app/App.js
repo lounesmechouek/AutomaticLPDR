@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 import Splash from './src/pages/Splash';
 import  Login  from './src/pages/Login';
+import Home from './src/pages/Home';
 
 const Stack = createStackNavigator()
 
@@ -28,6 +29,11 @@ export default function App() {
           name="Login"
           component={Login}
           options={{ title: 'Login' , headerShown : false }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: 'Home' , headerShown : false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

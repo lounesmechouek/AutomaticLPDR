@@ -15,11 +15,17 @@ const styles = StyleSheet.create({
       fontFamily: 'Quantico',
       fontSize : "20px"
     },
+    footer :{
+      fontFamily: 'Quantico',
+      fontSize : "20px",
+      marginBottom : '10%',
+      marginTop : 'auto'
+    },
     shadowProp: {
-      shadowColor: '#171717',
-      shadowOffset: {width: -2, height: 4},
+      shadowColor: '#FFFFFF',
+      shadowOffset: {width: 0, height: 20},
       shadowOpacity: 0.2,
-      shadowRadius: 3,
+      shadowRadius: 30,
     },
     formHolder :{
       backgroundColor : Colors.grey,
@@ -30,18 +36,32 @@ const styles = StyleSheet.create({
       marginTop : 'auto'
     },
     loginLogo : {
-      marginBottom : 'auto'
+      marginBottom : 'auto',
+      heigth: "200px"
     },
     input : {
-      fontFamily: 'Quantico',
+      fontFamily: 'QuanticoB',
       color : Colors.grey,
       backgroundColor : Colors.light_grey,
       margin : '10%',
-      fontSize : "16px",
+      fontSize : "14px",
       marginHorizontal : "7%",
       borderRadius : '12px',
       marginBottom : 0,
       padding : "5%"
+    },
+    inputErr :{
+      color : Colors.red,
+      borderColor : Colors.red,
+      borderWidth : "2%"
+    },
+    errMsg :{
+      fontFamily: 'QuanticoB',
+      color : Colors.red,
+      marginHorizontal : "7%",
+      marginTop : '3%',
+      textAlign : 'center'
+
     },
     dark_button_ctn : {
       alignItems: "center",

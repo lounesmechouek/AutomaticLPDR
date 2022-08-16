@@ -7,6 +7,7 @@ import Strings from '../strings';
 import { ScrollView } from 'react-native-gesture-handler';
 import DarkButton from '../components/DarkButton';
 import Colors from '../colors';
+import { Mock } from '../../tests/mocks';
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('')
@@ -29,6 +30,22 @@ const Login = ({ navigation }) => {
     };
   }, []);
   /* end of bullshit*/
+
+  const [err, setErr] = useState(false)
+  const [errMsg, seterrMsg] = useState()
+  
+  const log = () => {
+    Mock.Login(username.password)
+    .then( res => 
+      //saveTokenPersistent(res.data.token)
+      navigation.navigate('Splash')
+    )
+    .catch( err => { 
+        setErr(true)
+        seterrMsg(err.error)
+    })
+  } 
+
   return (
       <View style={[
         Style.container ,
@@ -49,27 +66,29 @@ const Login = ({ navigation }) => {
         </View>
         <View style={[Style.formHolder,Style.shadowProp]}>
           <TextInput 
-            style={Style.input}
+            style={err ? [Style.input,Style.inputErr] : Style.input}
             onChangeText={setUsername}
             placeholder= {Strings.FR.placeHolder.username}
             value={username}
-            placeholderTextColor= {Colors.grey} 
+            placeholderTextColor= {Colors.light_black} 
             returnKeyType="next"
-            blurOnSubmit={false}
+            blurOnSubmit={true}
             onSubmitEditing={() => passwordInputRef.current.focus()}
             keyboardType="alphanumeric"
           />
           <TextInput 
-            style={Style.input}
+            style={err ? [Style.input,Style.inputErr] : Style.input}
             onChangeText={setPassword}
             ref={passwordInputRef}
             placeholder= {Strings.FR.placeHolder.password}
-            placeholderTextColor= {Colors.grey} 
+            placeholderTextColor= {Colors.light_black} 
             secureTextEntry={true}
+            blurOnSubmit={true}
             value={password}
             keyboardType="alphanumeric"
           />
-          <DarkButton title={Strings.FR.button.login} />
+          <Text style={Style.errMsg}>{errMsg}</Text>
+          <DarkButton title={Strings.FR.button.login} onPress={log} />
         </View>
         
       </View>

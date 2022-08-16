@@ -4,7 +4,7 @@ import Style from '../styles'
 
 const DarkButton = (props) => {
   return (
-    <TouchableHighlight style={Style.dark_button_ctn} >
+    <TouchableHighlight style={Style.dark_button_ctn} {...props} >
         <Text style={Style.dark_button_txt}>
             {props.title}
         </Text>
