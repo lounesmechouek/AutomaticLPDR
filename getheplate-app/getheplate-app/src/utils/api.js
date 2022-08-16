@@ -1,4 +1,4 @@
-import { BASE_URL } from "../contants"
+import { BASE_URL } from "../constants"
 import axios from 'axios'
 
 export const headers = {
@@ -29,6 +29,8 @@ export const response = res =>{
     })
 }
 
+
+//TODO : to be moved elsewhere
 export const Model = {
     Login : (username,password) => api.post({
         url : '/auth/login',

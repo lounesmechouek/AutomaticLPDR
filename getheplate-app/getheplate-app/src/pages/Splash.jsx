@@ -4,14 +4,15 @@ import { StyleSheet, Text, TextInput, View ,Button ,Image, InteractionManager } 
 import Svg from 'react-native-svg-uri';
 import Style from '../styles'
 import { Mock } from '../../tests/mocks';
+import Strings from '../strings';
 const Splash = ({ navigation }) => {
 
     useEffect(() => {
         //TODO : get persistent token
         token = null
-        
+        //Simulating a check
         setTimeout(()=>
-        Mock.verifLoginFailed(token)
+        Mock.verifLogin(token)
         .then(res => navigation.reset({
             index: 0,
             routes: [{ name: 'Home' }],
@@ -40,7 +41,7 @@ const Splash = ({ navigation }) => {
                 />
             </View>
             <Text style={Style.footer}>
-                GET THE PLATE</Text>
+                {Strings.app.name}</Text>
         </View>
     )
 }

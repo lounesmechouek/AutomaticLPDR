@@ -2,7 +2,9 @@ export const Mock = {
     Login : (username,password) => Promise.resolve(userLog ) ,
     LoginFailed : (username,password)=> Promise.reject(noUserLog ) ,
     verifLogin : token => Promise.resolve(verifToken),
-    verifLoginFailed : token => Promise.reject(verifTokenFailed)
+    verifLoginFailed : token => Promise.reject(verifTokenFailed),
+    getScans : user_id => Promise.resolve(scans),
+    getScansFailed : user_id => Promise.resolve(emptyScans)
 }
 
 export const userLog = {
@@ -39,7 +41,7 @@ export const verifToken = {
 }
 
 export const scans = {
-    "data": [
+    data: [
         {
             "accuracy": 0.97,
             "created_at": "Thu, 04 Aug 2022 11:18:49 GMT",
@@ -48,11 +50,12 @@ export const scans = {
             "note": "",
             "photo_id": 2,
             "plate_id": 1,
-            "plate_text":  " 19254 125 15",
+            "plate_text":  "19254 125 15",
+            "is_flagged" : false,
             "user_id": 1
         },
         {
-            "accuracy": 0.97,
+            "accuracy": 0.92,
             "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
             "deleted": false,
             "id": 2,
@@ -60,9 +63,76 @@ export const scans = {
             "photo_id": 3,
             "plate_id": 1,
             "plate_text":  "15-GFE-48",
+            "is_flagged" : true,
+            "user_id": 1
+        },
+        {
+            "accuracy": 0.92,
+            "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
+            "deleted": false,
+            "id": 3,
+            "note": "",
+            "photo_id": 3,
+            "plate_id": 1,
+            "plate_text":  "15-GFE-48",
+            "is_flagged" : false,
+            "user_id": 1
+        },
+        {
+            "accuracy": 0.92,
+            "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
+            "deleted": false,
+            "id": 4,
+            "note": "",
+            "photo_id": 3,
+            "plate_id": 1,
+            "plate_text":  "15-GFE-48",
+            "is_flagged" : false,
+            "user_id": 1
+        },
+        {
+            "accuracy": 0.92,
+            "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
+            "deleted": false,
+            "id": 5,
+            "note": "",
+            "photo_id": 3,
+            "plate_id": 1,
+            "plate_text":  "15-GFE-48",
+            "is_flagged" : false,
+            "user_id": 1
+        },
+        {
+            "accuracy": 0.92,
+            "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
+            "deleted": false,
+            "id":6,
+            "note": "",
+            "photo_id": 3,
+            "plate_id": 1,
+            "plate_text":  "09854 113 42",
+            "is_flagged" : false,
+            "user_id": 1
+        },
+        {
+            "accuracy": 0.53,
+            "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
+            "deleted": false,
+            "id": 7,
+            "note": "",
+            "photo_id": 3,
+            "plate_id": 1,
+            "plate_text":  "47-RHF-48",
+            "is_flagged" : true,
             "user_id": 1
         }
     ],
     "message": "List of Scans",
     "success": true
+}
+
+export const emptyScans = {
+    success : true,
+    data : [],
+    message : "List of Scans"
 }

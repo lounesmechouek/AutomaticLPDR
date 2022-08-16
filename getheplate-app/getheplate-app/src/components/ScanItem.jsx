@@ -1,0 +1,36 @@
+import React from 'react'
+import { View ,Text,TouchableOpacity } from 'react-native'
+import Strings from '../strings'
+import Style from '../styles'
+import Svg from 'react-native-svg-uri';
+import Colors from '../colors';
+
+
+const ScanItem = ({ scan , navigation } ) => {
+    
+    const goToScanPage = () => {
+        navigation.navigate('Splash')
+        // to selected id scan
+    }
+    return (
+    <TouchableOpacity onPress={goToScanPage}>
+        <View style={[Style.scanCard,Style.shadowProp]} >
+            <Text style={Style.plateTxt}>{scan.plate_text}</Text>
+            <Text style={Style.scanItemTexts}>{Strings.home.precision} {scan.accuracy}</Text>
+            <Text style={Style.scanItemTexts}>{Strings.home.took_at} {scan.created_at}</Text>
+            <Svg
+                source={require('../assets/svg/8.svg')}
+                style={{ 
+                    alignSelf : "right",
+                    marginLeft : "auto",
+                    marginRight : "10%",
+                    marginVertical : "5%"
+                }}
+                fill = {scan.is_flagged ? Colors.red : null}
+            />
+        </View>
+    </TouchableOpacity>
+    )
+}
+
+export default ScanItem

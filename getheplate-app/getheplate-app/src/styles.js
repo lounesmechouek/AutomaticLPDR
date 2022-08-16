@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
       marginTop : 'auto'
     },
     shadowProp: {
-      shadowColor: '#FFFFFF',
-      shadowOffset: {width: 0, height: 20},
+      shadowColor: '#171717',
+      shadowOffset: {width: -1, height: 4},
       shadowOpacity: 0.2,
-      shadowRadius: 30,
+      shadowRadius: 3,
     },
     formHolder :{
       backgroundColor : Colors.grey,
@@ -77,6 +77,43 @@ const styles = StyleSheet.create({
       fontFamily: 'QuanticoB',
       color : Colors.white,
       fontSize : "16px"
+    },
+    scanCard :{
+      flex:1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginVertical : '5%',
+      minWidth : "90%",
+      minHeight : "30%",
+      borderRadius : "20px",
+      borderColor : Colors.light_grey,
+      backgroundColor : Colors.white
+    },
+    plateTxt :{
+      borderRadius : "5%",
+      paddingHorizontal : "2%",
+      fontFamily: 'QuanticoB',
+      alignSelf : "left",
+      marginVertical : '5%',
+      marginHorizontal : "7%",
+      color : Colors.black ,
+      borderColor : Colors.light_grey,
+      borderWidth : "5%",
+      fontSize : "20px",
+    },
+    scanItemTexts:{
+      alignSelf :"left",
+      fontFamily: 'Quantico',
+      marginHorizontal : "7%",
+      fontSize : "12px"
+    },
+    titlePageTxt : {
+      fontFamily: 'QuanticoB',
+      alignSelf : "left",
+      marginHorizontal : "10%",
+      marginVertical : "5%",
+      color : Colors.black ,
+      fontSize : "24px"
     }
     
   });

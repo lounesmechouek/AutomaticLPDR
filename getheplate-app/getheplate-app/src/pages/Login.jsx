@@ -68,7 +68,7 @@ const Login = ({ navigation }) => {
           <TextInput 
             style={err ? [Style.input,Style.inputErr] : Style.input}
             onChangeText={setUsername}
-            placeholder= {Strings.FR.placeHolder.username}
+            placeholder= {Strings.placeHolder.username}
             value={username}
             placeholderTextColor= {Colors.light_black} 
             returnKeyType="next"
@@ -80,7 +80,7 @@ const Login = ({ navigation }) => {
             style={err ? [Style.input,Style.inputErr] : Style.input}
             onChangeText={setPassword}
             ref={passwordInputRef}
-            placeholder= {Strings.FR.placeHolder.password}
+            placeholder= {Strings.placeHolder.password}
             placeholderTextColor= {Colors.light_black} 
             secureTextEntry={true}
             blurOnSubmit={true}
@@ -88,7 +88,7 @@ const Login = ({ navigation }) => {
             keyboardType="alphanumeric"
           />
           <Text style={Style.errMsg}>{errMsg}</Text>
-          <DarkButton title={Strings.FR.button.login} onPress={log} />
+          <DarkButton title={Strings.button.login} onPress={log} />
         </View>
         
       </View>
