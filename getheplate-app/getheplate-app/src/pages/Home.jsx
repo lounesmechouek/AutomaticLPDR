@@ -48,6 +48,7 @@ const Home = ({navigation}) => {
         extraData={scans}
       />
       <FloatingButton title={Strings.button.newScan} onPress={newScan}/>
+      { empty ? <Text> {Strings.home.noscan} </Text> : null }
     </SafeAreaView>
   )
 }

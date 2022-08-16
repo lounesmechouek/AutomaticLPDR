@@ -19,7 +19,8 @@ const strings = {
         home : {
             youPlates : "Vos Plaques",
             precision : "Précision",
-            took_at : "Prise"
+            took_at : "Prise le",
+            noscan : "Aucun scan retrouvé"
         },
         addScan : {
             option : "Veuillez selectionner l’une des options suivantes"

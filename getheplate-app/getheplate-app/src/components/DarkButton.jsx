@@ -1,14 +1,14 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View ,Button ,Image, Keyboard, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TextInput, View ,Button ,Image, Keyboard, TouchableOpacity } from 'react-native';
 import Style from '../styles'
 
 const DarkButton = (props) => {
   return (
-    <TouchableHighlight style={Style.dark_button_ctn} {...props} >
+    <TouchableOpacity style={Style.dark_button_ctn} {...props} >
         <Text style={Style.dark_button_txt}>
             {props.title}
         </Text>
-    </TouchableHighlight> 
+    </TouchableOpacity> 
   )
 }
 

@@ -17,7 +17,7 @@ const ScanItem = ({ scan , navigation } ) => {
         <View style={[Style.scanCard,Style.shadowProp]} >
             <Text style={Style.plateTxt}>{scan.plate_text}</Text>
             <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{scan.accuracy}</Text></Text>
-            <Text style={Style.scanItemTexts}>{Strings.home.took_at} {scan.created_at}</Text>
+            <Text style={Style.scanItemTexts}>{Strings.home.took_at} { new Date(scan.created_at).toLocaleString()}</Text>
             <Svg
                 source={require('../assets/svg/8.svg')}
                 style={{ 

@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View ,Button ,Image, Keyboard, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TextInput, View ,Button ,Image, Keyboard, TouchableOpacity } from 'react-native';
 import Svg from 'react-native-svg-uri'
 import Style from '../styles'
 
 const FloatingButton = (props) => {
   return (
-    <TouchableHighlight  {...props} >
+    <TouchableOpacity  {...props} >
       <View style={[Style.floating_button_ctn,Style.shadowProp]} >
         <Svg 
           source={require('../assets/svg/7.svg')}
@@ -15,7 +15,7 @@ const FloatingButton = (props) => {
             {props.title}
         </Text>
       </View>
-    </TouchableHighlight> 
+    </TouchableOpacity> 
   )
 }
 
