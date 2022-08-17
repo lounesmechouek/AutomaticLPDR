@@ -3,8 +3,9 @@ export const Mock = {
     LoginFailed : (username,password)=> Promise.reject(noUserLog ) ,
     verifLogin : token => Promise.resolve(verifToken),
     verifLoginFailed : token => Promise.reject(verifTokenFailed),
-    getScans : user_id => Promise.resolve(scans),
-    getScansFailed : user_id => Promise.resolve(emptyScans)
+    getScans : user_id => Promise.resolve(scans.data),
+    getScansFailed : user_id => Promise.resolve(emptyScans),
+    getScanPhotos : scan_id => Promise.resolve(scanPhotos.data)
 }
 
 export const userLog = {
@@ -37,6 +38,25 @@ export const verifTokenFailed = {
 export const verifToken = {
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MDY1NzE3OCwianRpIjoiZWY4NzYzNzAtMTFlNi00YWM2LWI5N2UtNjI5NzBiYzBiMzk4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwidXNlcm5hbWUiOiJtYWRqaWQiLCJoc2hfcGFzc3dvcmQiOiJwYmtkZjI6c2hhMjU2OjI2MDAwMCRJMWxlbnZwc3Zzb0dYNEJwJDQzZWQ3YmFjYzU5YjI2MDkxYWNkNzQ0ZDdjNWM4ZTllY2QwNjEyMTQ3YzIwMDkwNGY3ZWJkYzYxNTliOGU0N2MifSwibmJmIjoxNjYwNjU3MTc4LCJleHAiOjE2NjE1NzUxNzh9.wkxqcCL7vmxkLeiSysdoVRfK6xVwmISF6KeudNzjAX8",
     "message" : "Token still valid",  
+    "success": true
+}
+
+export const scanPhotos ={
+    "data": [
+        {
+            "created_at": "Thu, 04 Aug 2022 11:18:48 GMT",
+            "file_name_link": "https://i.ibb.co/vsMGb9M/car-dz.png",
+            "id": 2,
+            "isLabeled": false
+        },
+        {
+            "created_at": "Thu, 04 Aug 2022 11:25:41 GMT",
+            "file_name_link": "https://i.ibb.co/cJrQjbQ/image-2.png",
+            "id": 3,
+            "isLabeled": false
+        }
+    ],
+    "message": "List of Photos",
     "success": true
 }
 

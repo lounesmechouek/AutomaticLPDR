@@ -18,7 +18,7 @@ const Home = ({navigation}) => {
     Mock.getScans(null)
     .then(res =>{
       setEmpty(false)
-      setScans(res.data)
+      setScans(res)
     })
     .catch( err => {
       // Display Error

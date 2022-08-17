@@ -9,7 +9,9 @@ import Colors from '../colors';
 const ScanItem = ({ scan , navigation } ) => {
     
     const goToScanPage = () => {
-        navigation.navigate('Splash')
+        navigation.navigate('ScanPage',{
+            scan: scan
+        })
         // to selected id scan
     }
     return (
