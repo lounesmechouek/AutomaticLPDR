@@ -1,4 +1,7 @@
-log_config = dict(interval=5, hooks=[dict(type='TextLoggerHook')])
+log_config = dict(
+    interval=100,
+    hooks=[dict(type='TextLoggerHook'),
+           dict(type='TensorboardLoggerHook')])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 load_from = None
@@ -7,7 +10,7 @@ workflow = [('train', 1)]
 opencv_num_threads = 0
 mp_start_method = 'fork'
 label_convertor = dict(
-    type='AttnConvertor', dict_type='DICT90', with_unknown=True)
+    type='AttnConvertor', dict_type='DICT91', with_unknown=False, lower=True)
 model = dict(
     type='SARNet',
     backbone=dict(type='ResNet31OCR'),
@@ -24,9 +27,12 @@ model = dict(
         pred_concat=True),
     loss=dict(type='SARLoss'),
     label_convertor=dict(
-        type='AttnConvertor', dict_type='DICT90', with_unknown=True),
+        type='AttnConvertor',
+        dict_type='DICT91',
+        with_unknown=False,
+        lower=True),
     max_seq_len=30)
-optimizer = dict(type='Adam', lr=0.001)
+optimizer = dict(type='Adam', lr=0.000125)
 optimizer_config = dict(grad_clip=None)
 lr_config = dict(policy='step', step=[3, 4])
 runner = dict(type='EpochBasedRunner', max_epochs=5)
@@ -79,76 +85,56 @@ test_pipeline = [
 dataset_type = 'OCRDataset'
 root = 'tests/data/ocr_alpr_dataset'
 img_prefix = 'tests/data/ocr_alpr_dataset/'
-train_anno_file1 = 'tests/data/ocr_alpr_dataset/plaques_labels.txt'
+train_anno_file1 = 'tests/data/ocr_alpr_dataset/plaques_labels.jsonl'
 train1 = dict(
     type='OCRDataset',
     img_prefix='tests/data/ocr_alpr_dataset/',
-    ann_file='tests/data/ocr_alpr_dataset/plaques_labels.txt',
+    ann_file='tests/data/ocr_alpr_dataset/plaques_labels.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=100,
         file_format='txt',
         file_storage_backend='disk',
-        parser=dict(
-            type='LineStrParser',
-            keys=['filename', 'text'],
-            keys_idx=[0, 1],
-            separator=' ')),
+        parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
     pipeline=None,
     test_mode=False)
-train_anno_file2 = 'tests/data/ocr_alpr_dataset/plaques_labels_val.txt'
+train_anno_file2 = 'tests/data/ocr_alpr_dataset/plaques_labels_val.jsonl'
 train2 = dict(
     type='OCRDataset',
     img_prefix='tests/data/ocr_alpr_dataset/',
-    ann_file='tests/data/ocr_alpr_dataset/plaques_labels_val.txt',
+    ann_file='tests/data/ocr_alpr_dataset/plaques_labels_val.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=100,
         file_format='txt',
         file_storage_backend='disk',
-        parser=dict(type='LineStrParser', keys=['filename', 'text'])),
+        parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
     pipeline=None,
     test_mode=False)
-test_anno_file1 = 'tests/data/ocr_alpr_dataset/plaques_labels_test.txt'
+test_anno_file1 = 'tests/data/ocr_alpr_dataset/plaques_labels_test.jsonl'
 test = dict(
     type='OCRDataset',
     img_prefix='tests/data/ocr_alpr_dataset/',
-    ann_file='tests/data/ocr_alpr_dataset/plaques_labels_test.txt',
+    ann_file='tests/data/ocr_alpr_dataset/plaques_labels_test.jsonl',
     loader=dict(
         type='AnnFileLoader',
         repeat=1,
         file_format='txt',
         file_storage_backend='disk',
-        parser=dict(type='LineStrParser', keys=['filename', 'text'])),
+        parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
     pipeline=None,
     test_mode=True)
 train_list = [
     dict(
         type='OCRDataset',
         img_prefix='tests/data/ocr_alpr_dataset/',
-        ann_file='tests/data/ocr_alpr_dataset/plaques_labels.txt',
+        ann_file='tests/data/ocr_alpr_dataset/plaques_labels.jsonl',
         loader=dict(
             type='AnnFileLoader',
             repeat=100,
             file_format='txt',
             file_storage_backend='disk',
-            parser=dict(
-                type='LineStrParser',
-                keys=['filename', 'text'],
-                keys_idx=[0, 1],
-                separator=' ')),
-        pipeline=None,
-        test_mode=False),
-    dict(
-        type='OCRDataset',
-        img_prefix='tests/data/ocr_alpr_dataset/',
-        ann_file='tests/data/ocr_alpr_dataset/plaques_labels_val.txt',
-        loader=dict(
-            type='AnnFileLoader',
-            repeat=100,
-            file_format='txt',
-            file_storage_backend='disk',
-            parser=dict(type='LineStrParser', keys=['filename', 'text'])),
+            parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
         pipeline=None,
         test_mode=False)
 ]
@@ -156,52 +142,33 @@ test_list = [
     dict(
         type='OCRDataset',
         img_prefix='tests/data/ocr_alpr_dataset/',
-        ann_file='tests/data/ocr_alpr_dataset/plaques_labels_test.txt',
+        ann_file='tests/data/ocr_alpr_dataset/plaques_labels_test.jsonl',
         loader=dict(
             type='AnnFileLoader',
             repeat=1,
             file_format='txt',
             file_storage_backend='disk',
-            parser=dict(type='LineStrParser', keys=['filename', 'text'])),
+            parser=dict(type='LineJsonParser', keys=['filename', 'text'])),
         pipeline=None,
         test_mode=True)
 ]
 data = dict(
-    workers_per_gpu=1,
+    workers_per_gpu=2,
     samples_per_gpu=8,
-    train_dataloader=dict(samples_per_gpu=2, drop_last=True),
-    val_dataloader=dict(samples_per_gpu=6, workers_per_gpu=1),
-    test_dataloader=dict(workers_per_gpu=16),
     train=dict(
         type='UniformConcatDataset',
         datasets=[
             dict(
                 type='OCRDataset',
                 img_prefix='tests/data/ocr_alpr_dataset/',
-                ann_file='tests/data/ocr_alpr_dataset/plaques_labels.txt',
+                ann_file='tests/data/ocr_alpr_dataset/plaques_labels.jsonl',
                 loader=dict(
                     type='AnnFileLoader',
                     repeat=100,
                     file_format='txt',
                     file_storage_backend='disk',
                     parser=dict(
-                        type='LineStrParser',
-                        keys=['filename', 'text'],
-                        keys_idx=[0, 1],
-                        separator=' ')),
-                pipeline=None,
-                test_mode=False),
-            dict(
-                type='OCRDataset',
-                img_prefix='tests/data/ocr_alpr_dataset/',
-                ann_file='tests/data/ocr_alpr_dataset/plaques_labels_val.txt',
-                loader=dict(
-                    type='AnnFileLoader',
-                    repeat=100,
-                    file_format='txt',
-                    file_storage_backend='disk',
-                    parser=dict(
-                        type='LineStrParser', keys=['filename', 'text'])),
+                        type='LineJsonParser', keys=['filename', 'text'])),
                 pipeline=None,
                 test_mode=False)
         ],
@@ -232,14 +199,15 @@ data = dict(
             dict(
                 type='OCRDataset',
                 img_prefix='tests/data/ocr_alpr_dataset/',
-                ann_file='tests/data/ocr_alpr_dataset/plaques_labels_test.txt',
+                ann_file=
+                'tests/data/ocr_alpr_dataset/plaques_labels_test.jsonl',
                 loader=dict(
                     type='AnnFileLoader',
                     repeat=1,
                     file_format='txt',
                     file_storage_backend='disk',
                     parser=dict(
-                        type='LineStrParser', keys=['filename', 'text'])),
+                        type='LineJsonParser', keys=['filename', 'text'])),
                 pipeline=None,
                 test_mode=True)
         ],
@@ -277,14 +245,15 @@ data = dict(
             dict(
                 type='OCRDataset',
                 img_prefix='tests/data/ocr_alpr_dataset/',
-                ann_file='tests/data/ocr_alpr_dataset/plaques_labels_test.txt',
+                ann_file=
+                'tests/data/ocr_alpr_dataset/plaques_labels_test.jsonl',
                 loader=dict(
                     type='AnnFileLoader',
                     repeat=1,
                     file_format='txt',
                     file_storage_backend='disk',
                     parser=dict(
-                        type='LineStrParser', keys=['filename', 'text'])),
+                        type='LineJsonParser', keys=['filename', 'text'])),
                 pipeline=None,
                 test_mode=True)
         ],
@@ -316,6 +285,6 @@ data = dict(
                         ])
                 ])
         ]))
-evaluation = dict(interval=1, metric='acc')
-work_dir = 'recognition_results'
+evaluation = dict(interval=1, by_epoch=True, metric='acc')
+work_dir = 'train_sar_results'
 gpu_ids = [0]

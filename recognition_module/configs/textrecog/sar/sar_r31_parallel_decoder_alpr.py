@@ -12,11 +12,11 @@ train_pipeline = {{_base_.train_pipeline}}
 test_pipeline = {{_base_.test_pipeline}}
 
 data = dict(
-    workers_per_gpu=4,
+    workers_per_gpu=2,
     samples_per_gpu=8,
-    train_dataloader=dict(samples_per_gpu=10, drop_last=True),
-    val_dataloader=dict(samples_per_gpu=6, workers_per_gpu=1),
-    test_dataloader=dict(workers_per_gpu=16),
+    #train_dataloader=dict(samples_per_gpu=1, drop_last=True),
+    #val_dataloader=dict(samples_per_gpu=1, workers_per_gpu=1),
+    #test_dataloader=dict(workers_per_gpu=1),
     train=dict(
         type='UniformConcatDataset',
         datasets=train_list,
@@ -33,7 +33,8 @@ data = dict(
 evaluation = dict(interval=1, by_epoch=True, metric='acc')
 checkpoint_config = dict(interval=1)
 log_config = dict(
-    interval=5,  # Print out the model's performance every 5 iterations
+    interval=100,  # Print out the model's performance every 5 iterations
     hooks=[
-        dict(type='TextLoggerHook')
+        dict(type='TextLoggerHook'),
+        dict(type='TensorboardLoggerHook')
     ])

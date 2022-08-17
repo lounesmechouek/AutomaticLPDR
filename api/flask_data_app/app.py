@@ -154,14 +154,15 @@ def clean_folders():
     pth = ''
     for folder in SAVING_FOLDERS:
         for filename in os.listdir(folder):
-            pth = os.path.join(folder, filename)
-        try:
-            if os.path.isfile(pth) or os.path.islink(pth):
-                os.unlink(pth)
-            elif os.path.isdir(pth):
-                shutil.rmtree(pth)
-        except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (pth, e))
+            if filename != '.gitignore': 
+                pth = os.path.join(folder, filename)
+            try:
+                if os.path.isfile(pth) or os.path.islink(pth):
+                    os.unlink(pth)
+                elif os.path.isdir(pth):
+                    shutil.rmtree(pth)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (pth, e))
 
 ### Error handlers
 @app.errorhandler(404)
@@ -283,6 +284,12 @@ def getplatenumber():
             # On passe à la reconnaissance
             shutil.copy(result_path, os.path.join(MEDIA_DIR, 'plaques/'+filename))
             new_path = -1
+
+            # Ajouter ici la gestion du cas où il ya plusieurs plaques dans l'image
+            # Changer new_path en un tableau
+            # Vérifier le répertoire de résultats de detection
+            # Compter le nombre de plaques dans le répertoire de résultats de detection
+            # Faire une boucle pour la reconnaissance de chaque plaque et append à new_path
 
             try:
                 new_path = make_prediction(
