@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import Colors from './colors'
 
-const styles = StyleSheet.create({
+const Style = StyleSheet.create({
     global : {
       fontFamily: 'Quantico',
     },
@@ -139,8 +139,26 @@ const styles = StyleSheet.create({
       color : Colors.white,
       fontSize : "18px",
       marginRight : "auto"
+    },
+    imageHolder : {
+      flex:1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginVertical : '3%',
+      marginHorizontal : "5%",
+      minWidth : "90%",
+      minHeight : "30%",
+      borderRadius : "20%",
+      padding : "2%",
+      backgroundColor : Colors.white
+      
+    },
+    image :{
+      width: "100%",
+      height: 300,
+      borderRadius : "15%"
     }
     
   });
 
-export default styles
+export default Style

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View ,Text , FlatList, SafeAreaView ,StatusBar} from 'react-native'
 import Svg from 'react-native-svg-uri'
 import { Mock } from '../../tests/mocks'
-import FloatingButton from '../components/FloatingButton'
+import FloatingColorButton from '../components/FloatingColorButton'
 import ScanItem from '../components/ScanItem'
 import Strings from '../strings'
 import Style from '../styles'
@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
         keyExtractor={item => item.id}
         extraData={scans}
       />
-      <FloatingButton title={Strings.button.newScan} onPress={newScan}/>
+      <FloatingColorButton title={Strings.button.newScan} type="scan" color="dark_grey" onPress={newScan}/>
       { empty ? <Text> {Strings.home.noscan} </Text> : null }
     </SafeAreaView>
   )

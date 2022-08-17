@@ -1,10 +1,12 @@
 import React ,{useState,useEffect} from 'react'
-import { SafeAreaView, ScrollView ,View ,Button} from 'react-native'
+import { SafeAreaView, ScrollView ,View ,Button, Image, FlatList} from 'react-native'
 import Strings from '../strings'
 import Style from '../styles'
 import Svg from 'react-native-svg-uri';
 import Colors from '../colors';
 import { Mock } from '../../tests/mocks';
+import ImageHolder from '../components/ImageHolder';
+import FloatingColorButton from '../components/FloatingColorButton';
 
 const ScanPage = ({ route, navigation }) => {
     const { scan } = route.params
@@ -15,10 +17,13 @@ const ScanPage = ({ route, navigation }) => {
       .then(res => setphotos(res))
       .catch(err => seterrMsg(err.error))
     }, [])
-    
+    const confirmDelete = ()=>{
+        navigation.goBack()
+    }
+    //fill = {scan.is_flagged ? Colors.red : null}
     return (
         <SafeAreaView style={Style.container}>
-            <Button title="back" onPress={()=>navigation.goBack()}/>
+            <Button title={Strings.button.back} onPress={()=>navigation.goBack()}/>
             <Svg
                 source={require('../assets/svg/21.svg')}
                 style={{ 
@@ -26,13 +31,14 @@ const ScanPage = ({ route, navigation }) => {
                     right : 0,
                     top : 60
                 }}
-                fill = {scan.is_flagged ? Colors.red : null}
             />
-            <ScrollView>
-                <View>
-                    
-                </View>
-            </ScrollView>
+            <FlatList
+                data={photos}
+                renderItem={ ({item}) => <ImageHolder image_url={item.file_name_link} />}
+                keyExtractor={item => item.id}
+                extraData={photos}
+            />
+            <FloatingColorButton title={Strings.button.delete} color="red" type="delete" onPress={confirmDelete} />
         </SafeAreaView>
     )
 }
