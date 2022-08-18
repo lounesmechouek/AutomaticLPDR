@@ -32,7 +32,7 @@ SAVING_FOLDERS = [
 # Champs 3 et 14 à remplir dynamiquement dans la requête
 detect_props = [
     #os.path.join(ROOT_DIR, 'gtp/Scripts/python.exe'),
-    'python'
+    'python',
     os.path.join(DETECTION_DIR, 'detect.py'),
     '--source', '' ,
     '--weights', os.path.join(DETECTION_DIR, 'models/alpr/detection_weights.pt'),
@@ -45,7 +45,7 @@ detect_props = [
 # Champ 2 à remplir dynamiquement dans la requête
 recog_props = [
     #os.path.join(ROOT_DIR, 'gtp/Scripts/python.exe'),
-    'python'
+    'python',
     os.path.join(RECOGNITION_DIR, 'mmocr/utils/ocr.py'), '', # fichier source
     '--det', 'None',
     '--recog', 'SAR',
