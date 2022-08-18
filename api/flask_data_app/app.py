@@ -31,7 +31,8 @@ SAVING_FOLDERS = [
 
 # Champs 3 et 14 à remplir dynamiquement dans la requête
 detect_props = [
-    os.path.join(ROOT_DIR, 'gtp/Scripts/python.exe'),
+    #os.path.join(ROOT_DIR, 'gtp/Scripts/python.exe'),
+    'python',
     os.path.join(DETECTION_DIR, 'detect.py'),
     '--source', '' ,
     '--weights', os.path.join(DETECTION_DIR, 'models/alpr/detection_weights.pt'),
@@ -43,7 +44,8 @@ detect_props = [
 
 # Champ 2 à remplir dynamiquement dans la requête
 recog_props = [
-    os.path.join(ROOT_DIR, 'gtp/Scripts/python.exe'),
+    #os.path.join(ROOT_DIR, 'gtp/Scripts/python.exe'),
+    'python',
     os.path.join(RECOGNITION_DIR, 'mmocr/utils/ocr.py'), '', # fichier source
     '--det', 'None',
     '--recog', 'SAR',
@@ -124,7 +126,8 @@ def make_prediction(model_type, infos, args, dismiss=False):
     # Dans le cas où une erreur ait eu lieu durant l'inférence :
     try:
         subprocess.check_output(tab_arguments)
-    except:
+    except Exception as e:
+        print(e)
         return 1
     
     # Dans le cas où le fichier résultant ne se serait pas correctement enregistré :
@@ -154,14 +157,15 @@ def clean_folders():
     pth = ''
     for folder in SAVING_FOLDERS:
         for filename in os.listdir(folder):
-            pth = os.path.join(folder, filename)
-        try:
-            if os.path.isfile(pth) or os.path.islink(pth):
-                os.unlink(pth)
-            elif os.path.isdir(pth):
-                shutil.rmtree(pth)
-        except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (pth, e))
+            if filename != '.gitignore': 
+                pth = os.path.join(folder, filename)
+            try:
+                if os.path.isfile(pth) or os.path.islink(pth):
+                    os.unlink(pth)
+                elif os.path.isdir(pth):
+                    shutil.rmtree(pth)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (pth, e))
 
 ### Error handlers
 @app.errorhandler(404)
@@ -283,6 +287,12 @@ def getplatenumber():
             # On passe à la reconnaissance
             shutil.copy(result_path, os.path.join(MEDIA_DIR, 'plaques/'+filename))
             new_path = -1
+
+            # Ajouter ici la gestion du cas où il ya plusieurs plaques dans l'image
+            # Changer new_path en un tableau
+            # Vérifier le répertoire de résultats de detection
+            # Compter le nombre de plaques dans le répertoire de résultats de detection
+            # Faire une boucle pour la reconnaissance de chaque plaque et append à new_path
 
             try:
                 new_path = make_prediction(

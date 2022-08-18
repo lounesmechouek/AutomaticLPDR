@@ -1,5 +1,9 @@
+#label_convertor = dict(
+#    type='AttnConvertor', dict_type='DICT90', with_unknown=True)
+
 label_convertor = dict(
-    type='AttnConvertor', dict_type='DICT90', with_unknown=True)
+    type='AttnConvertor', dict_type='DICT91', with_unknown=False, lower=True)
+    #type='AttnConvertor', dict_list=list('0123456789 -.'), with_unknown=False, lower=True )
 
 model = dict(
     type='SARNet',

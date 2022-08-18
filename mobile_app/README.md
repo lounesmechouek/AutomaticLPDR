@@ -1,1 +1,0 @@
-# GetThePlate Mobile App
