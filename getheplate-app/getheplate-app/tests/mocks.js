@@ -70,6 +70,8 @@ export const scans = {
             "note": "",
             "photo_id": 2,
             "plate_id": 1,
+            "lat" : 48.8566,
+            "lon" : 2.3522,
             "plate_text":  "19254 125 15",
             "is_flagged" : false,
             "user_id": 1
@@ -82,6 +84,8 @@ export const scans = {
             "note": "",
             "photo_id": 3,
             "plate_id": 1,
+            "lat" : 45.767,
+            "lon" : 4.833,
             "plate_text":  "15-GFE-48",
             "is_flagged" : true,
             "user_id": 1
@@ -94,6 +98,8 @@ export const scans = {
             "note": "",
             "photo_id": 3,
             "plate_id": 1,
+            "lat" : 45.767,
+            "lon" : 4.833,
             "plate_text":  "15-GFE-48",
             "is_flagged" : false,
             "user_id": 1
@@ -106,6 +112,8 @@ export const scans = {
             "note": "",
             "photo_id": 3,
             "plate_id": 1,
+            "lat" : 45.767,
+            "lon" : 4.833,
             "plate_text":  "15-GFE-48",
             "is_flagged" : false,
             "user_id": 1
@@ -118,7 +126,9 @@ export const scans = {
             "note": "",
             "photo_id": 3,
             "plate_id": 1,
-            "plate_text":  "15-GFE-48",
+            "lat" : 0,
+            "lon" : 0,
+            "plate_text":  "AV-054-SL",
             "is_flagged" : false,
             "user_id": 1
         },
@@ -130,6 +140,8 @@ export const scans = {
             "note": "",
             "photo_id": 3,
             "plate_id": 1,
+            "lat" : 45.767,
+            "lon" : 4.833,
             "plate_text":  "09854 113 42",
             "is_flagged" : false,
             "user_id": 1
@@ -142,6 +154,8 @@ export const scans = {
             "note": "",
             "photo_id": 3,
             "plate_id": 1,
+            "lat" : 45.767,
+            "lon" : 4.833,
             "plate_text":  "47-RHF-48",
             "is_flagged" : true,
             "user_id": 1

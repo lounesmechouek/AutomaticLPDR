@@ -69,6 +69,7 @@ const Style = StyleSheet.create({
       marginVertical : '10%',
       marginHorizontal : "5%",
       padding: "4%",
+      flexDirection:'row',
       color : Colors.white,
       backgroundColor : Colors.dark_grey,
       borderRadius : "50%"
@@ -77,6 +78,22 @@ const Style = StyleSheet.create({
       fontFamily: 'QuanticoB',
       color : Colors.white,
       fontSize : "16px"
+    },
+    light_button_ctn : {
+      alignItems: "center",
+      margin : 'auto',
+      marginTop : '10%',
+      marginHorizontal : "5%",
+      padding: "4%",
+      flexDirection:'row',
+      backgroundColor : Colors.light_grey,
+      borderRadius : "50%"
+    },
+    light_button_txt : {
+      fontFamily: 'QuanticoB',
+      color : Colors.grey,
+      fontSize : "16px",
+      paddingHorizontal : 10
     },
     scanCard :{
       flex:1,

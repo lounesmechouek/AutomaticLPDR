@@ -7,6 +7,7 @@ const allPaths = {
     delete: require('../assets/svg/22.svg'),
     detect : require('../assets/svg/9.svg'),
     scan : require('../assets/svg/7.svg'),
+    save : require('../assets/svg/17.svg')
   };
   
 const FloatingColorButton = (props) => {
