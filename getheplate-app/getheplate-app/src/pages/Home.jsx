@@ -24,8 +24,11 @@ const Home = ({navigation}) => {
       // Display Error
       // TODO : error popup
     })
-  }, [])
+  }, [scans])
   
+  const updateScans = scan => {
+    setScans(scans.map(elt => elt.id==scan.id  ? scan : elt))
+  }
 
   return (
     <SafeAreaView style={Style.container}>
@@ -43,9 +46,8 @@ const Home = ({navigation}) => {
       </Text>
       <FlatList
         data={scans}
-        renderItem={ ({item}) => <ScanItem scan={item} navigation={navigation}/>}
+        renderItem={ ({item}) => <ScanItem scan={item} updateScans={updateScans} navigation={navigation}/>}
         keyExtractor={item => item.id}
-        extraData={scans}
       />
       <FloatingColorButton title={Strings.button.newScan} type="scan" color="dark_grey" onPress={newScan}/>
       { empty ? <Text> {Strings.home.noscan} </Text> : null }

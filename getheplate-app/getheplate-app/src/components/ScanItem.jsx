@@ -6,11 +6,14 @@ import Svg from 'react-native-svg-uri';
 import Colors from '../colors';
 
 
-const ScanItem = ({ scan , navigation } ) => {
+const ScanItem = ({ scan , updateScans , navigation } ) => {
     
     const goToScanPage = () => {
         navigation.navigate('ScanPage',{
-            scan: scan
+            scanPack :{
+                scan: scan,
+                updateScans : updateScans
+            }
         })
         // to selected id scan
     }

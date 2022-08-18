@@ -157,6 +157,36 @@ const Style = StyleSheet.create({
       fontSize : "18px",
       marginRight : "auto"
     },
+    line_button_ctn :{
+      alignItems: 'center',
+      flexDirection:'row',
+      minHeight : 60,
+      marginVertical : 2,
+      marginRight : "auto",
+      color : Colors.light_grey,
+      backgroundColor : Colors.black,
+      borderRadius : "20%",
+    },
+    line_button_icon : { 
+      width : 'auto',
+      alignSelf : 'center',
+      paddingHorizontal: 15
+    },
+    line_button_txt :{
+      fontFamily: 'QuanticoB',
+      color : Colors.white,
+      fontSize : "15px",
+      paddingRight : 15
+    },
+    container_23 :{
+      flexDirection : 'row' ,
+      width : "90%",
+      flexWrap: 'wrap',
+      alignSelf : 'center',
+      alignItems : 'center',
+      marginBottom : 20,
+      justifyContent : 'space-between'
+    },
     imageHolder : {
       flex:1,
       alignItems: 'center',
@@ -174,7 +204,7 @@ const Style = StyleSheet.create({
       width: "100%",
       height: 300,
       borderRadius : "15%"
-    }
+    },
     
   });
 

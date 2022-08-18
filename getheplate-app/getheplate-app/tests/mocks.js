@@ -5,7 +5,8 @@ export const Mock = {
     verifLoginFailed : token => Promise.reject(verifTokenFailed),
     getScans : user_id => Promise.resolve(scans.data),
     getScansFailed : user_id => Promise.resolve(emptyScans),
-    getScanPhotos : scan_id => Promise.resolve(scanPhotos.data)
+    getScanPhotos : scan_id => Promise.resolve(scanPhotos.data),
+    flagScan : (scan_id,val) => Promise.resolve( ()=> scans.data.map(elt=> elt.id==scan_id ? elt.is_flagged=val : elt))
 }
 
 export const userLog = {
