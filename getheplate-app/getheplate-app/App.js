@@ -7,6 +7,8 @@ import Splash from './src/pages/Splash';
 import  Login  from './src/pages/Login';
 import Home from './src/pages/Home';
 import ScanPage from './src/pages/ScanPage';
+import NewScan from './src/pages/NewScan';
+import BeforeScan from './src/pages/BeforeScan';
 
 const Stack = createStackNavigator()
 
@@ -40,6 +42,16 @@ export default function App() {
           name="ScanPage"
           component={ScanPage}
           options={{ title: 'Scan' , headerShown : false }}
+        />
+        <Stack.Screen
+          name="NewScan"
+          component={NewScan}
+          options={{ title: 'NewScan' , headerShown : false }}
+        />
+        <Stack.Screen
+          name="BeforeScan"
+          component={BeforeScan}
+          options={{ title: 'BeforeScan' , headerShown : false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

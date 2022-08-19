@@ -66,9 +66,10 @@ const Style = StyleSheet.create({
     dark_button_ctn : {
       alignItems: "center",
       margin : 'auto',
-      marginVertical : '10%',
+      marginVertical : '5%',
       marginHorizontal : "5%",
       padding: "4%",
+      width : '90%' ,
       flexDirection:'row',
       color : Colors.white,
       backgroundColor : Colors.dark_grey,
@@ -76,6 +77,9 @@ const Style = StyleSheet.create({
     },
     dark_button_txt : {
       fontFamily: 'QuanticoB',
+      textAlign : 'center',
+      marginLeft : 'auto',
+      marginRight : 'auto',  
       color : Colors.white,
       fontSize : "16px"
     },
@@ -136,7 +140,6 @@ const Style = StyleSheet.create({
     },
     floating_button_ctn :{
       alignItems: "center",
-      position : 'fixed',
       bottom : 0,
       left : 0,
       flexDirection:'row',
@@ -204,6 +207,28 @@ const Style = StyleSheet.create({
       width: "100%",
       height: 300,
       borderRadius : "15%"
+    },
+    vertical_button_ctn :{
+      alignItems: 'center',
+      flexDirection : 'column',
+      height : 180,
+      marginVertical : 10,
+      borderRadius : "20%",
+    },
+    vertical_button_icon : { 
+      width : 'auto',
+      marginTop : 'auto',
+      marginVertical : 'auto',
+      alignSelf : 'center',
+    },
+    vertical_button_txt :{
+      fontFamily: 'QuanticoB',
+      width : 140,
+      paddingHorizontal: 15,
+      textAlign : 'center',
+      textAlignVertical : 'center',
+      marginTop : 'auto',
+      marginBottom : "15%",
     },
     
   });

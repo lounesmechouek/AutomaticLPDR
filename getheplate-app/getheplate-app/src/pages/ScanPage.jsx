@@ -33,11 +33,9 @@ const ScanPage = ({ route , navigation }) => {
     }
     const toggleMark = ()=>{
         Mock.flagScan(scan.id,!marked)
-        .then(res => {
-            setmarked(!marked)
-            scan.is_flagged = !marked
-        })
+        .then(res => scan.is_flagged = !marked)
         .catch( err => console.log("message pop up here",err) )
+        .then(res =>  setmarked(!marked))
         route.params.scanPack.updateScans(scan)
     }
     return (

@@ -12,7 +12,7 @@ const Home = ({navigation}) => {
   const [scans, setScans] = useState([])
   const [empty, setEmpty] = useState(true)
   const newScan = () => {
-    navigation.navigate("Splash")
+    navigation.navigate("NewScan")
   }
   useEffect(() => {
     Mock.getScans(null)
@@ -29,6 +29,8 @@ const Home = ({navigation}) => {
   const updateScans = scan => {
     setScans(scans.map(elt => elt.id==scan.id  ? scan : elt))
   }
+
+  //shd add delete
 
   return (
     <SafeAreaView style={Style.container}>

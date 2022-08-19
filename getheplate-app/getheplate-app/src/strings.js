@@ -40,6 +40,12 @@ const strings = {
         },
         addScan : {
             option : "Veuillez selectionner l’une des options suivantes"
+        },
+        alerts :{
+            beforeScan : "Assurez vous qu’il ya au plus une seule plaque apparante dans l’image qui devrait etre lisible au moins a l’oeil nue, et ce pour assurer un resultat correct ",
+            scanning : "Nous utilisons des Algorithmes bases sur l’apprentissage machine pour detecter les plaques d’imatrictulation",
+            noDetection : "Aucune Plaque n’a ete trouve dans l’image !",
+            errorScan : "Un probleme est survenue lors de la detection"
         }
     }
 }
