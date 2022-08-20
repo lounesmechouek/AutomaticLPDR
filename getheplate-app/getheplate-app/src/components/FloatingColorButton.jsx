@@ -26,14 +26,14 @@ const FloatingColorButton = (props) => {
     return (
     <TouchableOpacity  {...props} >
         <View style={[Style.floating_button_ctn,shadowStyle,extraStyleCtn]} > 
-        <Svg 
-            source={assets[props.type]}
-            style={Style.floating_button_icon}
-            fill={props.fill}
-        />
-        <Text style={[Style.floating_button_txt,extraStyleTxt]}>
-            {props.title}
-        </Text>
+            <Svg 
+                source={assets[props.type]}
+                style={Style.floating_button_icon}
+                fill={props.fill}
+            />
+            <Text style={[Style.floating_button_txt,extraStyleTxt]}>
+                {props.title}
+            </Text>
         </View>
     </TouchableOpacity> 
     )

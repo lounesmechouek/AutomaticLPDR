@@ -46,6 +46,11 @@ const strings = {
             scanning : "Nous utilisons des Algorithmes bases sur l’apprentissage machine pour detecter les plaques d’imatrictulation",
             noDetection : "Aucune Plaque n’a ete trouve dans l’image !",
             errorScan : "Un probleme est survenue lors de la detection"
+        },
+        scanning : {
+            searching : "Recherche de Plaque",
+            segmentation : "Segmentation des caracteres",
+            finalisation : "Finalisation"
         }
     }
 }

@@ -9,6 +9,8 @@ import Home from './src/pages/Home';
 import ScanPage from './src/pages/ScanPage';
 import NewScan from './src/pages/NewScan';
 import BeforeScan from './src/pages/BeforeScan';
+import Scanning from './src/pages/Scanning';
+import ScanResult from './src/pages/ScanResult';
 
 const Stack = createStackNavigator()
 
@@ -52,6 +54,16 @@ export default function App() {
           name="BeforeScan"
           component={BeforeScan}
           options={{ title: 'BeforeScan' , headerShown : false }}
+        />
+        <Stack.Screen
+          name="Scanning"
+          component={Scanning}
+          options={{ title: 'Scanning' , headerShown : false }}
+        />
+        <Stack.Screen
+          name="ScanResult"
+          component={ScanResult}
+          options={{ title: 'ScanResult' , headerShown : false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

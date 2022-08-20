@@ -198,6 +198,7 @@ const Style = StyleSheet.create({
       marginHorizontal : "5%",
       minWidth : "90%",
       minHeight : "30%",
+      maxHeight : 320,
       borderRadius : "20%",
       padding : "2%",
       backgroundColor : Colors.white
@@ -205,7 +206,8 @@ const Style = StyleSheet.create({
     },
     image :{
       width: "100%",
-      height: 300,
+      height : 300,
+      maxHeight: 300,
       borderRadius : "15%"
     },
     vertical_button_ctn :{
@@ -230,6 +232,41 @@ const Style = StyleSheet.create({
       marginTop : 'auto',
       marginBottom : "15%",
     },
+    floating_box_ctn_2 :{
+      position : 'absolute',
+      bottom : "5%",
+      width : "90%",
+      height : 130,
+      justifyContent : 'space-between'
+    },
+    alert_ctn : {
+      flexDirection : 'row',
+      alignItems : 'center',
+      maxWidth : "90%",
+      marginTop : 10,
+    },
+    alert_svg : {
+      alignSelf: 'center',
+      marginBottom : 'auto'
+    },
+    decor_logo : { 
+      position : "absolute",
+      right : 0,
+      top : 60
+    },
+    steps_ctn : {
+
+    },
+    step : {
+
+    },
+    step_svg : {
+
+    },
+    step_text : {
+
+    },
+    
     
   });
 

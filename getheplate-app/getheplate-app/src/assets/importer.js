@@ -15,4 +15,7 @@ export const assets = {
     alert : require('./svg/13.svg'),
     scan_big : require('./svg/24.svg'),
     neural_big : require('./svg/23.svg'),
+    validation : require('./svg/1.svg'),
+    loading : require('./svg/1.svg'),
+    result_big : require('./svg/2.svg')
 }

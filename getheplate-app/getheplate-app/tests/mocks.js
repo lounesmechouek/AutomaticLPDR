@@ -6,7 +6,14 @@ export const Mock = {
     getScans : user_id => Promise.resolve(scans.data),
     getScansFailed : user_id => Promise.resolve(emptyScans),
     getScanPhotos : scan_id => Promise.resolve(scanPhotos.data),
-    flagScan : (scan_id,val) => Promise.resolve( ()=> scans.data.map(elt=> elt.id==scan_id ? elt.is_flagged=val : elt))
+    flagScan : (scan_id,val) => Promise.resolve( ()=> scans.data.map(elt=> elt.id==scan_id ? elt.is_flagged=val : elt)),
+    Scan : imgLink => Promise.resolve(scanResult) ,
+    ScanFailed : imgLink => Promise.reject(null)
+}
+
+export const scanResult ={
+    "score": 0.964208925962448,
+    "text": "25408 113 25"
 }
 
 export const userLog = {

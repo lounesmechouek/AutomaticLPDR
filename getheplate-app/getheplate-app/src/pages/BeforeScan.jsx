@@ -16,38 +16,36 @@ import ImageHolder from '../components/ImageHolder';
 const BeforeScan = ({navigation , photo }) => {
   const [image, setImage] = useState(photo)
   const [imageLink, setImageLink] = useState('https://i.ibb.co/cJrQjbQ/image-2.png')
+  const launchDetect =()=>{
+    //save photo and take id
+    navigation.navigate('Scanning',{
+        imageLink
+        //and id
+    })
+  }
   return (
-    <SafeAreaView style={Style.container}>
+    <SafeAreaView style={[Style.container,{
+        justifyContent : 'flex-start'
+    }]}>
         <StatusBar style="auto" />
         <Svg
             source={assets.scan_big}
-            style={{ 
-                position : "absolute",
-                right : 0,
-                top : 60
-            }}
+            style={Style.decor_logo}
         />
-        <Text style={Style.titlePageTxt}>{Strings.titles.image}</Text>
+        <Text style={Style.titlePageTxt}>{Strings.titles.image}</Text>      
         <ImageHolder image_url={imageLink} />
-        <View style={{
-            flexDirection : 'row',
-            alignItems : 'center',
-            width : "90%",
-        }}>
+        <View style={Style.alert_ctn}>
             <Svg 
                 source={assets.alert}
-                style={{
-                  alignSelf: 'center',
-                  marginTop : 25
-                }}
+                style={Style.alert_svg}
             />
             <Text style={Style.scanItemTexts}>
                 {Strings.alerts.beforeScan}
             </Text>
         </View>
-        <View>
-            <FloatingColorButton title={Strings.button.cancel} type="cancel" textColor="dark_grey" color='light_grey' onPress={navigation.goBack}/>
-            <FloatingColorButton title={Strings.button.detect} type="detect" color='green' onPress={navigation.goBack}/>
+        <View style={Style.floating_box_ctn_2}>
+            <FloatingColorButton title={Strings.button.cancel} type="cancel" textColor="dark_grey" noShadow={true} color='light_grey' onPress={navigation.goBack}/>
+            <FloatingColorButton title={Strings.button.detect} type="detect" color='green' onPress={launchDetect}/>
         </View>
     </SafeAreaView>
   )

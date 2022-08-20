@@ -37,11 +37,7 @@ const Home = ({navigation}) => {
       <StatusBar style="auto" />
       <Svg
             source={require('../assets/svg/20.svg')}
-            style={{ 
-                position : "absolute",
-                right : 0,
-                top : 60
-            }}
+            style={Style.decor_logo}
         />
       <Text style={Style.titlePageTxt} >
         {Strings.home.youPlates}

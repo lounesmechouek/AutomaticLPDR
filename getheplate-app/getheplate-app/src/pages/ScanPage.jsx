@@ -42,11 +42,7 @@ const ScanPage = ({ route , navigation }) => {
         <SafeAreaView style={Style.container}>
             <Svg
                 source={require('../assets/svg/21.svg')}
-                style={{ 
-                    position : "absolute",
-                    right : 0,
-                    top : 60
-                }}
+                style={Style.decor_logo}
             />
             <LightButton title={Strings.button.back} icon="back" align="left" onPress={()=>navigation.goBack()}/>
             <Text style={Style.plateTxt}>{scan.plate_text}</Text>
