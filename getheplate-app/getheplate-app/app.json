@@ -6,6 +6,15 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to open the camera",
+          "cameraPermission" :  "Allow $(PRODUCT_NAME) to open the camera"
+        }
+      ]
     ]
   }
 }

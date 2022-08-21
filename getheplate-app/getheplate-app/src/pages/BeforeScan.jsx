@@ -15,7 +15,7 @@ import ImageHolder from '../components/ImageHolder';
 
 const BeforeScan = ({navigation , photo }) => {
   const [image, setImage] = useState(photo)
-  const [imageLink, setImageLink] = useState('https://i.ibb.co/cJrQjbQ/image-2.png')
+  const [imageLink, setImageLink] = useState(photo)
   const launchDetect =()=>{
     //save photo and take id
     navigation.navigate('Scanning',{
