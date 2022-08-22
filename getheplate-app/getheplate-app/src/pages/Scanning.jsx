@@ -7,20 +7,20 @@ import Colors from '../colors'
 import { assets } from '../assets/importer'
 import ImageHolder from '../components/ImageHolder';
 import { Mock } from '../../tests/mocks'
+import {Model} from '../model'
 
 const Scanning = ({navigation ,route}) => {
-    const {imageLink} = route.params
+    const { photo } = route.params
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        setTimeout(() => {
-            Mock.Scan(imageLink)
+            Model.Scan(photo.url)
             .then( res => {
                 setLoading(false)
-                navigation.navigate('ScanResult',{scanResult : res , imageLink})
+                navigation.navigate('ScanResult',{ scanResult : res , photo })
             })
-            .catch ( err => navigation.navigate('ScanError'))
-        }, 2000);
-    }, [loading])
+            .catch ( err => console.log(err))
+        }
+    , [loading])
     
     return (
         <SafeAreaView style={[Style.container,{
@@ -51,7 +51,7 @@ const Scanning = ({navigation ,route}) => {
                         {Strings.alerts.scanning}
                     </Text>
                 </View>
-                <ImageHolder image_url={imageLink} />
+                <ImageHolder image_url={photo.url} />
             </View>
         </SafeAreaView>
     )

@@ -11,14 +11,11 @@ import DarkButton from '../components/DarkButton'
 import Strings from '../strings'
 import Style from '../styles'
 import * as ImagePicker from 'expo-image-picker';
+import { getLink } from '../utils/imageToLink'
 
 const NewScan = ({navigation}) => {
-  const [photo, setPhoto] = useState(null)
   const [geoloc, setGeoloc] = useState({lat:null,lon:null})
-  const importPhoto  = ()=>{
-    setPhoto(null)
-  }
-
+  
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -27,17 +24,7 @@ const NewScan = ({navigation}) => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      setPhoto(result.uri);
-    }
-
-    navigation.navigate('BeforeScan',{
-      photo : photo,
-      ...geoloc 
-    })
+    loadedPic(result)
   };
 
   const takeImage = async () => {
@@ -48,26 +35,20 @@ const NewScan = ({navigation}) => {
       base64 : true,
       quality: 1,
     });
-    
-    console.log(result);
-    if (!result.cancelled) {
-      setPhoto(result.uri);
-    }
-
-    navigation.navigate('BeforeScan',{
-      photo : photo,
-      ...geoloc 
-    })
+    loadedPic(result)
   }
 
-  const loadedPic = ()=>{
-    setPhoto(null)
-    setGeoloc({lat:null,lon:null})
-    // save in 
-    navigation.navigate('BeforeScan',{
-      photo : photo,
-      ...geoloc 
-    })
+  const loadedPic = result =>{
+    if (!result.cancelled) {
+      getLink(result.base64)
+      .then( photoLink => {
+        navigation.navigate('BeforeScan',{
+          photo : { ...photoLink },
+          ...geoloc 
+        })
+      })
+      .catch(err => console.log(err))
+    }
   }
 
   return (

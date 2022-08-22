@@ -11,7 +11,7 @@ import { Mock } from '../../tests/mocks'
 import FloatingColorButton from '../components/FloatingColorButton'
 
 const ScanResult = ({navigation ,route}) => {
-    const {scanResult ,imageLink} = route.params
+    const {scanResult , photo } = route.params
     return (
         <SafeAreaView style={[Style.container,{
             justifyContent : 'flex-start'
@@ -25,7 +25,7 @@ const ScanResult = ({navigation ,route}) => {
             <Text style={[Style.plateTxt,{fontSize : 30 }]}>{scanResult.text} </Text>
             <Text style={[Style.scanItemTexts,{fontSize : 20 }]}>{Strings.home.precision}</Text>
             <Text style={{color : Colors.green , alignSelf : "left" , marginLeft: 'auto' , width : '90%',fontFamily : "QuanticoB" , fontSize : 30 }}>{Math.floor(scanResult.score*100)}%</Text>
-            <ImageHolder image_url={imageLink} />
+            <ImageHolder image_url={photo.url} />
             <View style={Style.floating_box_ctn_2}>
                 <FloatingColorButton title={Strings.button.nosave} type="cancel" textColor="dark_grey" noShadow={true} color='light_grey' onPress={navigation.goBack}/>
                 <FloatingColorButton title={Strings.button.save} type="save" color='blue' onPress={null}/>
