@@ -24,19 +24,19 @@ const URLS = {
 
 export const model = {
     post : req =>
-        axios.post("http://35.232.72.59:5000" + req.url,req.data, {headers})
+        axios.post(URLS[ENV].model_url + req.url,req.data, {headers})
         .then(res => res.data)
         .catch( err => response(err))
 }
 
 export const api = {
     get : req =>
-        axios.get(URLS[DEV].be_url + req.url,{headers})
+        axios.get(URLS[ENV].be_url + req.url,{headers})
         .then(res => response(res.data))
         .catch( err => response(err))
     ,
     post : req =>
-        axios.post(URLS[DEV].be_url+ req.url,req.data,{headers})
+        axios.post(URLS[ENV].be_url+ req.url,req.data,{headers})
         .then(res => response(res.data))
         .catch( err => response(err))
 }

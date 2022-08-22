@@ -6,5 +6,5 @@ export const getLink = imageFile =>
         {image :  imageFile},
         {headers: { 'Content-Type': 'multipart/form-data'}}
         )
-    .then( res => res.data.data)
+    .then( res => res.data)
     .catch ( err => console.log(err))

@@ -9,9 +9,25 @@ import ImageHolder from '../components/ImageHolder';
 import { useEffect } from 'react'
 import { Mock } from '../../tests/mocks'
 import FloatingColorButton from '../components/FloatingColorButton'
+import axios from 'axios'
 
 const ScanResult = ({navigation ,route}) => {
     const {scanResult , photo } = route.params
+
+    const deleteScan = () => {
+        // this doesn't work API is not working for deletion
+        axios.post(photo.delete_url)
+        .then( res => 
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+            })
+        )
+    }
+
+    const saveScan = () => {
+
+    }
     return (
         <SafeAreaView style={[Style.container,{
             justifyContent : 'flex-start'
@@ -27,8 +43,8 @@ const ScanResult = ({navigation ,route}) => {
             <Text style={{color : Colors.green , alignSelf : "left" , marginLeft: 'auto' , width : '90%',fontFamily : "QuanticoB" , fontSize : 30 }}>{Math.floor(scanResult.score*100)}%</Text>
             <ImageHolder image_url={photo.url} />
             <View style={Style.floating_box_ctn_2}>
-                <FloatingColorButton title={Strings.button.nosave} type="cancel" textColor="dark_grey" noShadow={true} color='light_grey' onPress={navigation.goBack}/>
-                <FloatingColorButton title={Strings.button.save} type="save" color='blue' onPress={null}/>
+                <FloatingColorButton title={Strings.button.nosave} type="cancel" textColor="dark_grey" noShadow={true} color='light_grey' onPress={deleteScan}/>
+                <FloatingColorButton title={Strings.button.save} type="save" color='blue' onPress={saveScan}/>
             </View>
         </SafeAreaView>
     )
