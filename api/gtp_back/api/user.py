@@ -34,16 +34,15 @@ def deleteScanById(id :int):
 def allUserScans():
     try :
         user = get_jwt_identity()
-        return make_response(
-            True,
-            [e.serialize() for e in Scan.query
+        scans = [{**f.serialize(),**g.serialize(),**e.serialize()} for e,f,g in db.session.query(Scan,Plate,Photo)
+            .filter(Plate.id == Scan.plate_id)
+            .filter(Photo.id == Scan.photo_id)
             .filter(Scan.user_id==user['id'])
             .filter(Scan.is_deleted==False)
             .order_by(Scan.created_at)
             .distinct(Scan.plate_id)
-            ],
-            "List of Scans"
-            )
+            .all()]
+        return make_response(True,scans,"List of Scans")
     except :
         return make_response(False)
 
@@ -64,4 +63,3 @@ def allScans(id : int):
             )
     except : 
         return make_response(False)
-    

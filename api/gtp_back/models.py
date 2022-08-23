@@ -43,7 +43,7 @@ class Format(db.Model):
     regex = db.Column(db.String(80) , nullable=False)
 
     def __repr__(self):
-        return '<Format %r>' % self.country
+        return '<Format %r>' % self.text_sample
     def serialize(self):
         return {
             'id': self.id, 
@@ -60,7 +60,7 @@ class Plate(db.Model):
     format_id = db.Column(db.Integer, db.ForeignKey('format.id'))
 
     def __repr__(self):
-        return '<Plate %r>' % self.country
+        return '<Plate %r>' % self.text_plate
     def serialize(self):
         return {
             'id': self.id, 
@@ -81,7 +81,7 @@ class Scan(db.Model):
     note = db.Column(db.String(255), default = "" ,nullable = True )
 
     def __repr__(self):
-        return '<Scan %r>' % self.country
+        return '<Scan %r>' % self.id
     def serialize(self):
         return {
             'id': self.id, 
