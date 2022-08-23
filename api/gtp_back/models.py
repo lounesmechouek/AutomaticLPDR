@@ -32,7 +32,9 @@ class Photo(db.Model):
             'id': self.id, 
             'file_name_link': self.file_name_link,
             'isLabeled': self.is_labeled,
-            'created_at' : self.created_at
+            'created_at' : self.created_at,
+            'lon' : self.longitude,
+            'lat' : self.latitude
         }
 
 class Format(db.Model):

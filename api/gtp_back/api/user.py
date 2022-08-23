@@ -53,8 +53,9 @@ def allScans(id : int):
         user = get_jwt_identity()
         return make_response(
             True,
-            [e.serialize() for e in Photo.query.join(Scan)
-            .filter(Scan.photo_id == Photo.id)
+            [e.serialize() for e,f in db.session.query(Photo,Scan)
+            .filter(Scan.id == id)
+            .filter(Photo.id == Scan.photo_id )
             .filter(Scan.is_deleted == False)
             .filter(Scan.user_id == user['id'])
             .order_by(Photo.created_at)
