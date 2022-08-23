@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { View ,Text, SafeAreaView ,StatusBar ,ActivityIndicator} from 'react-native'
 import Strings from '../strings'
 import Style from '../styles'
@@ -6,23 +6,21 @@ import Svg from 'react-native-svg-uri'
 import Colors from '../colors'
 import { assets } from '../assets/importer'
 import ImageHolder from '../components/ImageHolder';
-import { useEffect } from 'react'
-import { Mock } from '../../tests/mocks'
 import FloatingColorButton from '../components/FloatingColorButton'
-import axios from 'axios'
+import Model from '../model'
 
 const ScanResult = ({navigation ,route}) => {
     const {scanResult , photo } = route.params
 
     const deleteScan = () => {
-        // this doesn't work API is not working for deletion
-        axios.post(photo.delete_url)
-        .then( res => 
-            navigation.reset({
-                index: 0,
-                routes: [{ name: 'Home' }],
-            })
-        )
+        // This API is not working for deletion PROVIDER PROBLEM
+        Model.DeletePhotoLink(photo.delete_url)
+        
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }],
+        })
+        
     }
 
     const saveScan = () => {

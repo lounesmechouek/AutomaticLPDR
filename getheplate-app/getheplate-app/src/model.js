@@ -1,5 +1,5 @@
 import { api, model } from "./utils/api";
-
+import axios from "axios";
 export const Model = {
     Login : (username,password) => api.post({
         url : '/auth/login',
@@ -12,7 +12,9 @@ export const Model = {
                 filename : "image.jpg", //default
                 img : imgLink
             }
-        })
+        }),
+    DeletePhotoLink : delUrl => axios.post(delUrl) ,
+
 }
 
 export default Model ;
