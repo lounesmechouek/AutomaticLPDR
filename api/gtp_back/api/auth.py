@@ -5,7 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import ( 
-    create_access_token, get_jwt_identity, jwt_required, JWTManager
+    create_access_token, get_jwt_identity, jwt_required, JWTManager,get_jwt
 )
 
 from gtp_back.functions import make_response
@@ -33,10 +33,10 @@ def register():
 
 
 @bp.route('/verif', methods=['POST'])
+@jwt_required()
 def verifLogged():
     try :
-        verify_jwt_in_request()
-        return make_response(True,get_jwt(),"Token still valid")
+        return make_response(True,get_jwt_identity(),"Token still valid")
     except :
         return make_response(False,error = "No Token or expired" )
 

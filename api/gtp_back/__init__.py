@@ -18,8 +18,7 @@ def create_app(test_config=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gtp.db' 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["JWT_SECRET_KEY"] = "pfe-gtp"  
-    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=255)
-    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=365)
     jwt = JWTManager(app)
 
     if test_config is None:
