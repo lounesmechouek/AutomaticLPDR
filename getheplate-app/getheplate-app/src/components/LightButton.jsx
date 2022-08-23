@@ -1,13 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View ,Button ,Image, Keyboard, TouchableOpacity } from 'react-native';
 import Svg from 'react-native-svg-uri';
+import { assets } from '../assets/importer';
 import Style from '../styles'
 
-const allPaths = {
-    back : require('../assets/svg/18.svg'),
-    add : require('../assets/svg/21.svg'),
-    cancel : require('../assets/svg/21.svg')
-}
 
 const LightButton = (props) => {
 
@@ -16,7 +12,7 @@ const LightButton = (props) => {
         {
             !!props.icon ?
             <Svg 
-                source={allPaths[props.icon]}
+                source={assets[props.icon]}
                 style={Style.floating_button_icon}
             />
             :null

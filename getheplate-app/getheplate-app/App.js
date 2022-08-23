@@ -11,6 +11,7 @@ import NewScan from './src/pages/NewScan';
 import BeforeScan from './src/pages/BeforeScan';
 import Scanning from './src/pages/Scanning';
 import ScanResult from './src/pages/ScanResult';
+import ScanError from './src/pages/ScanError';
 
 const Stack = createStackNavigator()
 
@@ -64,6 +65,11 @@ export default function App() {
           name="ScanResult"
           component={ScanResult}
           options={{ title: 'ScanResult' , headerShown : false }}
+        />
+        <Stack.Screen
+          name="ScanError"
+          component={ScanError}
+          options={{ title: 'ScanError' , headerShown : false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

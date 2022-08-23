@@ -2,7 +2,7 @@
   "expo": {
     "name": "getheplate-app",
     "slug": "gettheplate-app",
-    "owner" : "badido",
+    "owner": "badido",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
@@ -12,9 +12,10 @@
         "expo-image-picker",
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to open the camera",
-          "cameraPermission" :  "Allow $(PRODUCT_NAME) to open the camera"
+          "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera"
         }
-      ]
+      ],
+      "react-native-compressor"
     ]
   }
 }

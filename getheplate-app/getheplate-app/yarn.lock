@@ -5651,6 +5651,11 @@ react-native-codegen@^0.69.1:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-compressor@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-compressor/-/react-native-compressor-1.5.2.tgz#be0cb4baa12d2595af503c245f3fee6ccfa9ff91"
+  integrity sha512-PaNM0h75thxO6NePTWVukSXy9Bt8zBu54VnYcAG8YD4lYHTqVmE9IhYv/ydc9t2bl6nVIuyi+ApMuDPihY9JFA==
+
 react-native-elements@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-3.4.2.tgz#66602be9c5e0e0a2a831913adec80ff6518d1ee2"

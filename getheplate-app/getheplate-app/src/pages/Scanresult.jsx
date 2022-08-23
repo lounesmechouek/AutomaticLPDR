@@ -14,7 +14,7 @@ const ScanResult = ({navigation ,route}) => {
 
     const deleteScan = () => {
         // This API is not working for deletion PROVIDER PROBLEM
-        Model.DeletePhotoLink(photo.delete_url)
+        // Model.DeletePhotoLink(photo.delete_url)
         
         navigation.reset({
             index: 0,
@@ -26,6 +26,7 @@ const ScanResult = ({navigation ,route}) => {
     const saveScan = () => {
 
     }
+
     return (
         <SafeAreaView style={[Style.container,{
             justifyContent : 'flex-start'

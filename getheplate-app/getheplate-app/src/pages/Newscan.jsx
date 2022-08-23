@@ -12,6 +12,7 @@ import Strings from '../strings'
 import Style from '../styles'
 import * as ImagePicker from 'expo-image-picker';
 import { getLink } from '../utils/imageToLink'
+import { Compressor } from '../utils/imageCompressor'
 
 const NewScan = ({navigation}) => {
   const [geoloc, setGeoloc] = useState({lat:null,lon:null})
@@ -21,8 +22,8 @@ const NewScan = ({navigation}) => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       base64 : true,
-      aspect: [4, 3],
-      quality: 1,
+      aspect: [16, 9],
+      quality: 0.2,
     });
     loadedPic(result)
   };
@@ -33,7 +34,7 @@ const NewScan = ({navigation}) => {
       allowsEditing: true,
       aspect: [16, 9],
       base64 : true,
-      quality: 1,
+      quality: 0.2,
     });
     loadedPic(result)
   }

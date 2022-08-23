@@ -60,7 +60,7 @@ const Style = StyleSheet.create({
       color : Colors.red,
       marginHorizontal : "7%",
       marginTop : '3%',
-      textAlign : 'center'
+      textAlign : 'left'
 
     },
     dark_button_ctn : {

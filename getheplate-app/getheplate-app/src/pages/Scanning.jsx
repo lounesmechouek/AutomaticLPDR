@@ -18,7 +18,7 @@ const Scanning = ({navigation ,route}) => {
                 setLoading(false)
                 navigation.navigate('ScanResult',{ scanResult : res , photo })
             })
-            .catch ( err => console.log(err))
+            .catch ( err => navigation.navigate('ScanError',{ photo , error : Strings.alerts.noDetection , other : err}))
         }
     , [loading])
     
