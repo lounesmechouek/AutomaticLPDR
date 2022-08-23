@@ -20,8 +20,8 @@ const ScanItem = ({ scan , updateScans , navigation } ) => {
     return (
     <TouchableOpacity onPress={goToScanPage}>
         <View style={[Style.scanCard,Style.shadowProp]} >
-            <Text style={Style.plateTxt}>{scan.plate_text}</Text>
-            <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{scan.accuracy}</Text></Text>
+            <Text style={Style.plateTxt}>{scan.text_plate}</Text>
+            <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{Math.floor(scan.accuracy*100)} %</Text></Text>
             <Text style={Style.scanItemTexts}>{Strings.home.took_at} { new Date(scan.created_at).toLocaleString()}</Text>
             <Svg
                 source={require('../assets/svg/8.svg')}
@@ -30,7 +30,7 @@ const ScanItem = ({ scan , updateScans , navigation } ) => {
                     right : "5%",
                     bottom : '10%'
                 }}
-                fill = {scan.is_flagged ? Colors.red : null}
+                fill = {scan.flagged ? Colors.red : null}
             />
         </View>
     </TouchableOpacity>

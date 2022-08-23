@@ -1,4 +1,4 @@
-export const LOCAL_URL = "http://localhost"
+export const LOCAL_URL = "http://127.0.0.1"
 export const BASE_URL = "http://35.232.72.59"
 export const MODEL_PORT = 5000 
 export const BE_PORT = 8081

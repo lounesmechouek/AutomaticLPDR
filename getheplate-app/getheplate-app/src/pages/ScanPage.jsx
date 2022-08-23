@@ -10,6 +10,7 @@ import FloatingColorButton from '../components/FloatingColorButton';
 import LineColorButton from '../components/LineColorButton';
 import LightButton from '../components/LightButton';
 import getGeo from '../utils/geocoder';
+import Model from '../model';
 
 const ScanPage = ({ route , navigation }) => {
     
@@ -17,10 +18,10 @@ const ScanPage = ({ route , navigation }) => {
     const [photos, setphotos] = useState([])
     const [errMsg, seterrMsg] = useState()
     const [addr, setAddr] = useState(null)
-    const [marked, setmarked] = useState(scan.is_flagged)
+    const [marked, setmarked] = useState(scan.flagged)
     useEffect(() => {
         //get Photos
-        Mock.getScanPhotos(scan.id)
+        Model.getScanPhotos(scan.id)
         .then(res => setphotos(res))
         .catch(err => seterrMsg(err.error))
         //getGeoloc
@@ -29,14 +30,14 @@ const ScanPage = ({ route , navigation }) => {
         .catch(err => setAddr("Position non disponible"))
         }, [])
     const confirmDelete = ()=>{
-        navigation.goBack()
+        Model.deleteScan(scan.id)
+        .then(navigation.goBack())
+        .catch(err => console.log(err))
     }
     const toggleMark = ()=>{
-        Mock.flagScan(scan.id,!marked)
-        .then(res => scan.is_flagged = !marked)
+        Model.flagScan(scan.plate_id,!marked)
+        .then(res => setmarked(!marked))
         .catch( err => console.log("message pop up here",err) )
-        .then(res =>  setmarked(!marked))
-        route.params.scanPack.updateScans(scan)
     }
     return (
         <SafeAreaView style={Style.container}>
@@ -45,8 +46,8 @@ const ScanPage = ({ route , navigation }) => {
                 style={Style.decor_logo}
             />
             <LightButton title={Strings.button.back} icon="back" align="left" onPress={()=>navigation.goBack()}/>
-            <Text style={Style.plateTxt}>{scan.plate_text}</Text>
-            <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{scan.accuracy}</Text></Text>
+            <Text style={Style.plateTxt}>{scan.text_plate}</Text>
+            <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{Math.floor(scan.accuracy*100)} %</Text></Text>
             <View style={[{flexDirection : 'row' , alignItems : 'left'},Style.scanItemTexts]}>
                 <Svg source={require('../assets/svg/4.svg')}/>
                 <Text style={[Style.scanItemTexts,{marginBottom : 0}]}>{addr}</Text>

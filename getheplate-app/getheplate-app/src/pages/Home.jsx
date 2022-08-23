@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { View ,Text , FlatList, SafeAreaView ,StatusBar} from 'react-native'
 import Svg from 'react-native-svg-uri'
-import { Mock } from '../../tests/mocks'
 import FloatingColorButton from '../components/FloatingColorButton'
 import ScanItem from '../components/ScanItem'
+import Model, { user_id } from '../model'
 import Strings from '../strings'
 import Style from '../styles'
 
@@ -15,7 +15,7 @@ const Home = ({navigation}) => {
     navigation.navigate("NewScan")
   }
   useEffect(() => {
-    Mock.getScans(null)
+    Model.getScans(user_id)
     .then(res =>{
       setEmpty(false)
       setScans(res)

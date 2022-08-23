@@ -24,7 +24,17 @@ const ScanResult = ({navigation ,route}) => {
     }
 
     const saveScan = () => {
-
+        Model.saveScan({
+            "file_name_link" : photo.url,
+            "longitude" : 3.042048, // Algeirs default
+            "latitude" : 36.752887,
+            "country" : "Algeria", // default
+            "text_plate" : scanResult.text,
+            "note" : "",
+            "accuracy" : scanResult.score
+        })
+        .then(res=> deleteScan())
+        .catch( err => console.log(err))
     }
 
     return (

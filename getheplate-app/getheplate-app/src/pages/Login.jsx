@@ -8,6 +8,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import DarkButton from '../components/DarkButton';
 import Colors from '../colors';
 import { Mock } from '../../tests/mocks';
+import Model from '../model';
+import { token }  from '../model'
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('')
@@ -35,14 +37,16 @@ const Login = ({ navigation }) => {
   const [errMsg, seterrMsg] = useState()
   
   const log = () => {
-    Mock.Login(username.password)
-    .then( res => 
-      //saveTokenPersistent(res.data.token)
+    Model.Login(username,password)
+    .then( res => {
+      //saveTokenPersistent
+      // token  = res.token
       navigation.navigate('Splash')
-    )
+    })
     .catch( err => { 
         setErr(true)
-        seterrMsg(err.error)
+        console.log(err)
+        seterrMsg(err)
     })
   } 
 
