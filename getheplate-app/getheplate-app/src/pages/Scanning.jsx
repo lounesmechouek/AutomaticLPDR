@@ -36,7 +36,7 @@ const Scanning = ({navigation ,route}) => {
                 <ActivityIndicator 
                     animating ={loading}
                     size="large" 
-                    color={Colors.yellow}   
+                    color={Colors.dark_grey}   
                     hidesWhenStopped={true} />
             </View>
             

@@ -1,8 +1,11 @@
 import { api, model } from "./utils/api";
 import axios from "axios";
 
-export var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MDY1NzI0OSwianRpIjoiNTY5YmI1M2QtNjc3MS00OTFjLThlODQtODU3ZjNmZjQ0MDBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwidXNlcm5hbWUiOiJtYWRqaWQiLCJoc2hfcGFzc3dvcmQiOiJwYmtkZjI6c2hhMjU2OjI2MDAwMCRJMWxlbnZwc3Zzb0dYNEJwJDQzZWQ3YmFjYzU5YjI2MDkxYWNkNzQ0ZDdjNWM4ZTllY2QwNjEyMTQ3YzIwMDkwNGY3ZWJkYzYxNTliOGU0N2MifSwibmJmIjoxNjYwNjU3MjQ5LCJleHAiOjE2NjE1NzUyNDl9.xhLmJtXy9KYf0TK5cMEjrCpdi7qjtzP0y94FzFQFEaI" 
-export var user_id = 1
+
+import { storage } from "./utils/storage";
+export var getToken = async () => await storage.get('token')
+export var getUserd = async () => await storage.get('user_id')
+
 
 export const Model = {
     Login : (username,password) => api.post({
@@ -18,40 +21,40 @@ export const Model = {
             }
         }),
     DeletePhotoLink : delUrl => axios.post(delUrl) ,
-    verifLogin : () => api.post({
+    verifLogin : async () => api.post({
         url : '/auth/verif',
         data : null,
-        token
+        token : await getToken()
     }),
-    getScans : user_id => api.get({
+    getScans : async ()=> api.get({
         url : '/user/scans',
-        token
+        token : await getToken()
     }),
-    getScanPhotos : scan_id => api.get({
+    getScanPhotos : async scan_id => api.get({
         url : `/user/scan/${scan_id}/photos`,
-        token 
+        token : await getToken()
     }),
-    flagScan : (plate_id,val) => 
+    flagScan : async (plate_id,val) => 
         val ? api.patch({
         url : `/plate/flag/${plate_id}`,
             data : null,
-            token 
+            token : await getToken()
         }) : 
         api.patch({
             url : `/plate/unflag/${plate_id}`,
             data : null,
-            token 
+            token : await getToken()
         }) 
         //some code may be added
     ,
-    saveScan : scan => api.post({
+    saveScan : async scan => api.post({
         url : '/scan/save',
         data : scan,
-        token
+        token : await getToken()
     }),
-    deleteScan : scan_id => api.delete({
+    deleteScan : async scan_id => api.delete({
         url : `/user/delete/scan/${scan_id}`,
-        token 
+        token : await getToken()
     }),
 
 }

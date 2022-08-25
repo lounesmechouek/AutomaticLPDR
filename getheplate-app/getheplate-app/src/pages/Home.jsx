@@ -6,6 +6,7 @@ import ScanItem from '../components/ScanItem'
 import Model, { user_id } from '../model'
 import Strings from '../strings'
 import Style from '../styles'
+import { storage } from '../utils/storage'
 
 const Home = ({navigation}) => {
 
@@ -39,7 +40,7 @@ const Home = ({navigation}) => {
             source={require('../assets/svg/20.svg')}
             style={Style.decor_logo}
         />
-      <Text style={Style.titlePageTxt} >
+      <Text style={Style.titlePageTxt}>
         {Strings.home.youPlates}
       </Text>
       <FlatList

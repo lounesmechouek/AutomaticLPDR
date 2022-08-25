@@ -13,6 +13,7 @@ import Style from '../styles'
 import * as ImagePicker from 'expo-image-picker';
 import { getLink } from '../utils/imageToLink'
 import { Compressor } from '../utils/imageCompressor'
+import { storage } from '../utils/storage'
 
 const NewScan = ({navigation}) => {
   const [geoloc, setGeoloc] = useState({lat:null,lon:null})
@@ -39,6 +40,14 @@ const NewScan = ({navigation}) => {
     loadedPic(result)
   }
 
+  const disconnect = async ()=> {
+    await storage.delete('token')
+    await navigation.reset({
+      index: 0,
+      routes: [{ name: 'Splash' }],
+    })
+  }
+
   const loadedPic = result =>{
     if (!result.cancelled) {
       getLink(result.base64)
@@ -55,6 +64,7 @@ const NewScan = ({navigation}) => {
   return (
     <SafeAreaView style={Style.container}>
       <StatusBar style="auto" />
+      <View><Text style ={{color : Colors.white}} onPress={disconnect} >disconnect</Text></View>
         <View style={Style.formHolder} >
             <Svg 
                 source={assets.car}

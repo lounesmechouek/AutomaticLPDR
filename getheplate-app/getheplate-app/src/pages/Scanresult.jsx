@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect ,useState } from 'react'
 import { View ,Text, SafeAreaView ,StatusBar ,ActivityIndicator} from 'react-native'
 import Strings from '../strings'
 import Style from '../styles'
@@ -10,8 +10,15 @@ import FloatingColorButton from '../components/FloatingColorButton'
 import Model from '../model'
 
 const ScanResult = ({navigation ,route}) => {
-    const {scanResult , photo } = route.params
+    const {scanResult , photo } = route.params    
+    const [saved, setsaved] = useState(false)
 
+    useEffect(() => {
+      saved 
+      ? deleteScan()
+      : setsaved (false)
+    }, [saved])
+    
     const deleteScan = () => {
         // This API is not working for deletion PROVIDER PROBLEM
         // Model.DeletePhotoLink(photo.delete_url)
@@ -23,8 +30,9 @@ const ScanResult = ({navigation ,route}) => {
         
     }
 
-    const saveScan = () => {
-        Model.saveScan({
+    // TODO : Fix the loop back navigation
+    const saveScan = async () => {
+        await Model.saveScan({
             "file_name_link" : photo.url,
             "longitude" : 3.042048, // Algeirs default
             "latitude" : 36.752887,
@@ -33,8 +41,11 @@ const ScanResult = ({navigation ,route}) => {
             "note" : "",
             "accuracy" : scanResult.score
         })
-        .then(res=> deleteScan())
-        .catch( err => console.log(err))
+        setsaved(true)
+        navigation.reset({
+            index: 1,
+            routes: [{ name: 'Home' }],
+        })
     }
 
     return (

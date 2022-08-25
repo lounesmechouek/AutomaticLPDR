@@ -15,7 +15,6 @@ const ScanItem = ({ scan , updateScans , navigation } ) => {
                 updateScans : updateScans
             }
         })
-        // to selected id scan
     }
     return (
     <TouchableOpacity onPress={goToScanPage}>
