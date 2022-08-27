@@ -11,7 +11,7 @@ const strings = {
         },
         button : {
             login : "Se connecter",
-            newScan : "Faire un nouveau scan",
+            newScan : "Effectuer un nouveau scan",
             cancel : "Annuler",
             getFromGallery : "Importer depuis la galerie",
             takePhoto : "Prendre une photo",
@@ -23,33 +23,33 @@ const strings = {
             detect : "Détecter la plaque",
             save : "Enregistrer",
             nosave : "Ne pas enregistrer",
-            backHome : "Retour a l'accueil",
+            backHome : "Retour à l'accueil",
             tryAgain : "Réessayer"
         },
         titles:{
             image : "Votre image",
             traitment : "Traitement de l'image",
-            result : "Resulat",
+            result : "Résulat",
             yourPlates : "Vos Plaques"
         },
         home : {
             youPlates : "Vos Plaques",
             precision : "Précision",
             took_at : "Prise le",
-            noscan : "Aucun scan retrouvé"
+            noscan : "Aucun scan trouvé"
         },
         addScan : {
-            option : "Veuillez selectionner l’une des options suivantes"
+            option : "Veuillez sélectionner l’une des options suivantes"
         },
         alerts :{
-            beforeScan : "Assurez vous qu’il ya au plus une seule plaque apparante dans l’image qui devrait etre lisible au moins a l’oeil nue, et ce pour assurer un resultat correct ",
-            scanning : "Nous utilisons des Algorithmes bases sur l’apprentissage machine pour detecter les plaques d’imatrictulation",
-            noDetection : "Aucune Plaque n’a ete trouvé dans l’image !",
-            errorScan : "Un probleme est survenue lors de la detection"
+            beforeScan : "Les résultats seront plus précis avec une image de bonne qualité et une plaque bien lisible.",
+            scanning : "Nous utilisons des algorithmes de deep learning pour reconnaitre les plaques d’immatrictulation",
+            noDetection : "Aucune plaque n’a été localisée dans l’image !", 
+            errorScan : "Un problème est survenu lors du processus de reconnaissance"
         },
         scanning : {
-            searching : "Recherche de Plaque",
-            segmentation : "Segmentation des caracteres",
+            searching : "Recherche de Plaque...",
+            segmentation : "Reconnaissance des caractères...",
             finalisation : "Finalisation"
         }
     }
