@@ -10,7 +10,7 @@ const VerticalButton = (props) => {
         BKColor : "light_grey",
         TColor  : "black",
         minWidth : "auto",
-        fontSize : "14px"
+        fontSize : 14
     }
     const BKColor = props.color || defaults.BKColor
     const TColor = props.textColor || defaults.TColor

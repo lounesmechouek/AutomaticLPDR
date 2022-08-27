@@ -30,7 +30,7 @@ const Splash = ({ navigation }) => {
             accessibilityLabel="Launch!"
             onPress={() => navigation.navigate('Login')}
             >
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
             <View 
                 style={[Style.container,Style.loginLogo]}>
                 <Svg

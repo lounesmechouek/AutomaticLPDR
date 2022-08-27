@@ -13,23 +13,24 @@ const Style = StyleSheet.create({
     },
     header : {
       fontFamily: 'Quantico',
-      fontSize : "20px"
+      fontSize : 20
     },
     footer :{
       fontFamily: 'Quantico',
-      fontSize : "20px",
+      fontSize : 20,
       marginBottom : '10%',
       marginTop : 'auto'
     },
     shadowProp: {
-      shadowColor: '#171717',
-      shadowOffset: {width: 1, height: 10},
+      shadowColor: "#171717",
+      shadowOffset: {width: 0, height: 10},
       shadowOpacity: 0.1,
       shadowRadius: 10,
+      elevation: 2,
     },
     formHolder :{
       backgroundColor : Colors.grey,
-      borderRadius : '20px',
+      borderRadius : 20,
       width : '90%',
       margin : 'auto',
       marginBottom : '10%',
@@ -37,43 +38,44 @@ const Style = StyleSheet.create({
     },
     loginLogo : {
       marginBottom : 'auto',
-      heigth: "200px"
+      heigth: 200
     },
     input : {
       fontFamily: 'QuanticoB',
       color : Colors.grey,
+      overflow :'hidden',
       backgroundColor : Colors.light_grey,
       margin : '10%',
-      fontSize : "14px",
-      marginHorizontal : "7%",
-      borderRadius : '12px',
+      fontSize : 14,
+      marginHorizontal : '7%',
+      borderRadius : 12,
       marginBottom : 0,
-      padding : "5%"
+      padding : '5%'
     },
     inputErr :{
       color : Colors.red,
       borderColor : Colors.red,
-      borderWidth : "2%"
+      borderWidth : 2
     },
     errMsg :{
       fontFamily: 'QuanticoB',
       color : Colors.red,
-      marginHorizontal : "7%",
+      marginHorizontal : '7%',
       marginTop : '3%',
       textAlign : 'left'
 
     },
     dark_button_ctn : {
-      alignItems: "center",
+      alignItems: 'center',
       margin : 'auto',
       marginVertical : '5%',
-      marginHorizontal : "5%",
-      padding: "4%",
+      marginHorizontal : '5%',
+      padding: '4%',
       width : '90%' ,
       flexDirection:'row',
       color : Colors.white,
       backgroundColor : Colors.dark_grey,
-      borderRadius : "50%"
+      borderRadius : 50
     },
     dark_button_txt : {
       fontFamily: 'QuanticoB',
@@ -81,22 +83,22 @@ const Style = StyleSheet.create({
       marginLeft : 'auto',
       marginRight : 'auto',  
       color : Colors.white,
-      fontSize : "16px"
+      fontSize : 16
     },
     light_button_ctn : {
-      alignItems: "center",
+      alignItems: 'center',
       margin : 'auto',
       marginTop : '10%',
-      marginHorizontal : "5%",
-      padding: "4%",
+      marginHorizontal : '5%',
+      padding: '4%',
       flexDirection:'row',
       backgroundColor : Colors.light_grey,
-      borderRadius : "50%"
+      borderRadius : 50
     },
     light_button_txt : {
       fontFamily: 'QuanticoB',
       color : Colors.grey,
-      fontSize : "16px",
+      fontSize : 16,
       paddingHorizontal : 10
     },
     scanCard :{
@@ -104,71 +106,73 @@ const Style = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       marginVertical : '3%',
-      marginHorizontal : "5%",
-      minWidth : "90%",
-      minHeight : "30%",
-      borderRadius : "20px",
+      marginHorizontal : '5%',
+      minWidth : '90%',
+      minHeight : '30%',
+      borderRadius : 20,
       borderColor : Colors.light_grey,
       backgroundColor : Colors.white
     },
     plateTxt :{
-      borderRadius : "10%",
-      paddingHorizontal : "2%",
+      alignSelf : 'flex-start',
+      borderRadius : 10,
+      textAlignVertical: 'center',
+      textAlign : 'center',
+      paddingHorizontal : '2%',
       fontFamily: 'QuanticoB',
-      alignSelf : "left",
       marginVertical : '5%',
-      marginHorizontal : "5%",
+      marginHorizontal : '5%',
       color : Colors.black ,
       borderColor : Colors.light_grey,
-      borderWidth : "5%",
-      fontSize : "22px",
+      borderWidth : 5,
+      fontSize : 22,
     },
     scanItemTexts:{
-      alignSelf :"left",
+      alignSelf :  'flex-start',
       fontFamily: 'Quantico',
-      marginHorizontal : "7%",
-      fontSize : "12px",
-      marginBottom : "5%",
+      marginHorizontal : '7%',
+      fontSize : 12,
+      marginBottom : '5%',
     },
     titlePageTxt : {
       fontFamily: 'QuanticoB',
-      alignSelf : "left",
-      marginHorizontal : "10%",
-      marginVertical : "5%",
+      alignSelf : 'flex-start',
+      marginHorizontal : '10%',
+      marginVertical : '5%',
       color : Colors.black ,
-      fontSize : "24px"
+      fontSize : 24
     },
     floating_button_ctn :{
-      alignItems: "center",
+      alignItems: 'center',
       bottom : 0,
       left : 0,
       flexDirection:'row',
-      minWidth : "90%",
+      minWidth : '90%',
       maxHeight : 100,
-      padding: "4%",
+      padding: '4%',
       color : Colors.white,
       backgroundColor : Colors.dark_grey,
-      borderRadius : "20%"
+      borderRadius : 20
     },
     floating_button_icon : { 
       marginLeft: 0,
-      marginRight : "auto"
+      marginRight : 'auto'
     },
     floating_button_txt :{
       fontFamily: 'Quantico',
       color : Colors.white,
-      fontSize : "18px",
-      marginRight : "auto"
+      fontSize : 18,
+      marginRight : 'auto'
     },
     line_button_ctn :{
       alignItems: 'center',
       flexDirection:'row',
       minHeight : 60,
       marginVertical : 2,
-      marginRight : "auto",
+      marginRight : 'auto',
       color : Colors.light_grey,
       backgroundColor : Colors.black,
-      borderRadius : "20%",
+      borderRadius : 20,
     },
     line_button_icon : { 
       width : 'auto',
@@ -178,12 +182,12 @@ const Style = StyleSheet.create({
     line_button_txt :{
       fontFamily: 'QuanticoB',
       color : Colors.white,
-      fontSize : "15px",
+      fontSize : 15,
       paddingRight : 15
     },
     container_23 :{
       flexDirection : 'row' ,
-      width : "90%",
+      width : '90%',
       flexWrap: 'wrap',
       alignSelf : 'center',
       alignItems : 'center',
@@ -195,27 +199,27 @@ const Style = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       marginVertical : '3%',
-      marginHorizontal : "5%",
-      minWidth : "90%",
-      minHeight : "30%",
+      marginHorizontal : '5%',
+      minWidth : '90%',
+      minHeight : '30%',
       maxHeight : 320,
-      borderRadius : "20%",
-      padding : "2%",
+      borderRadius : 20,
+      padding : '2%',
       backgroundColor : Colors.white
       
     },
     image :{
-      width: "100%",
+      width: '100%',
       height : 300,
       maxHeight: 300,
-      borderRadius : "15%"
+      borderRadius : 15
     },
     vertical_button_ctn :{
       alignItems: 'center',
       flexDirection : 'column',
       height : 180,
       marginVertical : 10,
-      borderRadius : "20%",
+      borderRadius : 20,
     },
     vertical_button_icon : { 
       width : 'auto',
@@ -230,19 +234,19 @@ const Style = StyleSheet.create({
       textAlign : 'center',
       textAlignVertical : 'center',
       marginTop : 'auto',
-      marginBottom : "15%",
+      marginBottom : '15%',
     },
     floating_box_ctn_2 :{
       position : 'absolute',
-      bottom : "5%",
-      width : "90%",
+      bottom : '5%',
+      width : '90%',
       height : 130,
       justifyContent : 'space-between'
     },
     alert_ctn : {
       flexDirection : 'row',
       alignItems : 'center',
-      maxWidth : "90%",
+      maxWidth : '90%',
       marginTop : 10,
     },
     alert_svg : {
@@ -250,7 +254,7 @@ const Style = StyleSheet.create({
       marginBottom : 'auto'
     },
     decor_logo : { 
-      position : "absolute",
+      position : 'absolute',
       right : 0,
       top : 60
     },

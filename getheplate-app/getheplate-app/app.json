@@ -7,6 +7,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "androidStatusBar": {
+      "backgroundColor": "#000000",
+      "translucent": false
+    },
+    "androidNavigationBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#000000"
+    },
     "plugins": [
       [
         "expo-image-picker",
@@ -16,6 +24,17 @@
         }
       ],
       "react-native-compressor"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "37463fad-5584-470c-8b8c-2707765e8bda"
+      }
+    },
+    "android": {
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.badido.gettheplateapp"
+    }
   }
 }

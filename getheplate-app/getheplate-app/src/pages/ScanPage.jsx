@@ -14,7 +14,7 @@ import Model from '../model';
 
 const ScanPage = ({ route , navigation }) => {
     
-    let { scan } = route.params?.scanPack
+    let { scan , updateScans} = route.params?.scanPack
     const [photos, setphotos] = useState([])
     const [errMsg, seterrMsg] = useState()
     const [addr, setAddr] = useState(null)
@@ -36,7 +36,7 @@ const ScanPage = ({ route , navigation }) => {
     }
     const toggleMark = ()=>{
         Model.flagScan(scan.plate_id,!marked)
-        .then(res => setmarked(!marked))
+        .then(res => { updateScans(scan) ; setmarked(!marked) })
         .catch( err => console.log("message pop up here",err) )
     }
     return (
@@ -45,10 +45,10 @@ const ScanPage = ({ route , navigation }) => {
                 source={require('../assets/svg/21.svg')}
                 style={Style.decor_logo}
             />
-            <LightButton title={Strings.button.back} icon="back" align="left" onPress={()=>navigation.goBack()}/>
+            <LightButton title={Strings.button.back} icon="back" align='flex-start' onPress={()=>navigation.goBack()}/>
             <Text style={Style.plateTxt}>{scan.text_plate}</Text>
             <Text style={Style.scanItemTexts}>{Strings.home.precision} : <Text style={{color : Colors.green , fontFamily : 'QuanticoB'}}>{Math.floor(scan.accuracy*100)} %</Text></Text>
-            <View style={[{flexDirection : 'row' , alignItems : 'left'},Style.scanItemTexts]}>
+            <View style={[{flexDirection : 'row' , alignItems : 'flex-start'},Style.scanItemTexts]}>
                 <Svg source={require('../assets/svg/4.svg')}/>
                 <Text style={[Style.scanItemTexts,{marginBottom : 0}]}>{addr}</Text>
             </View>

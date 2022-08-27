@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { View ,Text , FlatList, SafeAreaView ,StatusBar} from 'react-native'
+import { View ,Text , FlatList, SafeAreaView } from 'react-native'
+import * as NavigationBar from 'expo-navigation-bar';
+import { StatusBar } from 'expo-status-bar';
 import Svg from 'react-native-svg-uri'
 import FloatingColorButton from '../components/FloatingColorButton'
 import ScanItem from '../components/ScanItem'
 import Model, { user_id } from '../model'
 import Strings from '../strings'
 import Style from '../styles'
-import { storage } from '../utils/storage'
 
 const Home = ({navigation}) => {
-
+  NavigationBar.setBackgroundColorAsync("white");
   const [scans, setScans] = useState([])
-  const [empty, setEmpty] = useState(true)
   const newScan = () => {
     navigation.navigate("NewScan")
   }
   useEffect(() => {
-    Model.getScans(user_id)
+    Model.getScans()
     .then(res =>{
-      setEmpty(false)
       setScans(res)
     })
     .catch( err => {
@@ -35,21 +34,25 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={Style.container}>
-      <StatusBar style="auto" />
+      <StatusBar 
+        style='light'
+        animated={true}
+        translucent={false}
+        hidden={false}
+        backgroundColor = 'white' />  
       <Svg
             source={require('../assets/svg/20.svg')}
             style={Style.decor_logo}
         />
-      <Text style={Style.titlePageTxt}>
-        {Strings.home.youPlates}
-      </Text>
-      <FlatList
-        data={scans}
-        renderItem={ ({item}) => <ScanItem scan={item} updateScans={updateScans} navigation={navigation}/>}
-        keyExtractor={item => item.id}
-      />
+        <Text style={Style.titlePageTxt}>
+          {Strings.home.youPlates}
+        </Text>
+        <FlatList
+          data={scans}
+          renderItem={ ({item}) => <ScanItem scan={item} updateScans={updateScans} navigation={navigation}/>}
+          keyExtractor={item => item.id}
+        />
       <FloatingColorButton title={Strings.button.newScan} type="scan" color="dark_grey" onPress={newScan}/>
-      { empty ? <Text> {Strings.home.noscan} </Text> : null }
     </SafeAreaView>
   )
 }

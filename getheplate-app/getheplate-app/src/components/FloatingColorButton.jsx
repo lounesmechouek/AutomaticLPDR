@@ -10,7 +10,7 @@ const FloatingColorButton = (props) => {
         BKColor : "dark_grey",
         TColor  : "white",
         minWidth : "90%",
-        fontSize : "18px"
+        fontSize : 18
     }
     const BKColor = props.color || defaults.BKColor
     const TColor = props.textColor || defaults.TColor

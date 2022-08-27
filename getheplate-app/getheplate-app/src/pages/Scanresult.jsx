@@ -60,7 +60,7 @@ const ScanResult = ({navigation ,route}) => {
             <Text style={Style.titlePageTxt}>{Strings.titles.result}</Text>
             <Text style={[Style.plateTxt,{fontSize : 30 }]}>{scanResult.text} </Text>
             <Text style={[Style.scanItemTexts,{fontSize : 20 }]}>{Strings.home.precision}</Text>
-            <Text style={{color : Colors.green , alignSelf : "left" , marginLeft: 'auto' , width : '90%',fontFamily : "QuanticoB" , fontSize : 30 }}>{Math.floor(scanResult.score*100)}%</Text>
+            <Text style={{color : Colors.green , alignSelf : 'flex-start' , marginLeft: 'auto' , width : '90%',fontFamily : "QuanticoB" , fontSize : 30 }}>{Math.floor(scanResult.score*100)}%</Text>
             <ImageHolder image_url={photo.url} />
             <View style={Style.floating_box_ctn_2}>
                 <FloatingColorButton title={Strings.button.nosave} type="cancel" textColor="dark_grey" noShadow={true} color='light_grey' onPress={deleteScan}/>

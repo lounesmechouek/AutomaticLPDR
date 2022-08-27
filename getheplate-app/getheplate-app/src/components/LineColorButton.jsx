@@ -11,7 +11,7 @@ const LineColorButton = (props) => {
         BKColor : "light_grey",
         TColor  : "black",
         minWidth : "auto",
-        fontSize : "12px"
+        fontSize : 12
     }
     const BKColor = props.color || defaults.BKColor
     const TColor = props.textColor || defaults.TColor

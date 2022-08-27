@@ -25,8 +25,8 @@ const ScanItem = ({ scan , updateScans , navigation } ) => {
             <Svg
                 source={require('../assets/svg/8.svg')}
                 style={{ 
-                    position : "absolute",
-                    right : "5%",
+                    position : 'absolute',
+                    right : '5%',
                     bottom : '10%'
                 }}
                 fill = {scan.flagged ? Colors.red : null}

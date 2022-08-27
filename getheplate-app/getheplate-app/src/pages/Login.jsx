@@ -61,7 +61,7 @@ const Login = ({ navigation }) => {
         <View style={[Style.container,Style.loginLogo]}>
           <Svg
             source={require('../assets/svg/10.svg')}
-            style={{ heigth: "100px"}}
+            style={{ heigth: 100}}
           />
           <Text style={Style.header}>
             GET THE PLATE

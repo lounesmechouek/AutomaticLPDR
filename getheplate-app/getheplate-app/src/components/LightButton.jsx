@@ -8,7 +8,7 @@ import Style from '../styles'
 const LightButton = (props) => {
 
   return (
-    <TouchableOpacity style={props.align ? [Style.light_button_ctn,{alignSelf : props.align}] : Style.light_button_ctn} {...props} >
+    <TouchableOpacity style={props.align ? [Style.light_button_ctn,{alignSelf : props.align || 'flex-start'}] : Style.light_button_ctn} {...props} >
         {
             !!props.icon ?
             <Svg 

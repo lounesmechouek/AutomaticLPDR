@@ -63,7 +63,10 @@ const NewScan = ({navigation}) => {
 
   return (
     <SafeAreaView style={Style.container}>
-      <StatusBar style="auto" />
+      <StatusBar 
+        style="auto" 
+        hidden={true} 
+        />
       <View><Text style ={{color : Colors.white}} onPress={disconnect} >disconnect</Text></View>
         <View style={Style.formHolder} >
             <Svg 
