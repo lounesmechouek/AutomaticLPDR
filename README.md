@@ -26,25 +26,71 @@ Si vous souhaitez tester le projet, suivez les instructions de la partie suivant
 Vous devez disposer d'une version fonctionnelle de Python pour utiliser la partie Machine Learning et API de ce projet. Nous vous conseillons d'utiliser la version **3.9.9** (ou ultérieure) étant donné qu'il a été créé avec cette dernière.
 
 **Commencez par installer les dépendances nécessaires**
-    <details>
-        <summary>1. Si vous utilisez Linux :</summary>
-        <p>
-            1. Exécutez les commandes suivantes à partir de la racine du projet :
-            </br>
-            <code>user@DESKTOP:~/AutomaticLPDR$ python3.9 -m venv</code>
-            <code>user@DESKTOP:~/AutomaticLPDR$ source gtp/bin/activate</code>
-            </br>
-            2. La suite de la procédure dépend de la disponibilité d'un GPU dans votre machine :
-            </br>
-                2.1. Si vous avez un GPU NVIDIA et que vous souhaitez l'utiliser :
-                </br>
-                - Vérifiez que vous avez installé le Toolkit **CUDA** ainsi que **cuDNN**
-                </br>
-                - Exécutez la commande suivante : 
-                </br>
-                <b>Attention</b> : Veillez bien à modifier les trois dernières lignes du fichier windows_gpu_requirements.txt pour indiquer la version de CUDA installée sur votre machine, par défaut nous considérons que vous disposez de CUDA 11.3**
-        </p>
-    </details>
+### 1. Si vous utilisez Linux :
+**Étape 1.** Exécutez les commandes suivantes à partir de la racine du projet
 
-    
+```console
+user@DESKTOP:~/AutomaticLPDR$ python3.9 -m venv gtp
+user@DESKTOP:~/AutomaticLPDR$ source gtp/bin/activate
+```
+**Étape 2** Dépend de la disponibilité d'un GPU dans votre machine :
+Si vous avez un GPU NVIDIA et que vous souhaitez l'utiliser :
+
+- Vérifiez que vous avez installé le Toolkit **CUDA** ainsi que **cuDNN**
+- Exécutez la commande suivante : 
                 
+**Attention** : Veillez bien à modifier les trois dernières lignes du fichier windows_gpu_requirements.txt pour indiquer la version de CUDA installée sur votre machine, par défaut nous considérons que vous disposez de CUDA 11.3**
+
+```bash
+(gtp) user@DESKTOP:~/AutomaticLPDR$ pip install -r requirements/linux_gpu_requirements.txt
+```
+
+Si vous **ne disposez pas** de GPU, ou que vous souhaitez utiliser votre CPU :
+        - Exécutez la commande suivante : 
+
+```bash
+    (gtp) user@DESKTOP:~/AutomaticLPDR$ pip install -r requirements/linux_cpu_requirements.txt
+```
+**Étape 3** : Pour finir, exécutez la commande suivante : 
+
+```bash
+(gtp) user@DESKTOP:~/AutomaticLPDR$ pip install -v -e recognition_module
+```
+
+### 2. Si vous utilisez Windows :
+
+- Pensez à définir la version 3.9.x de python comme version principale dans votre PATH, si vous en avez plusiers.
+- Installez **Microsoft Visual Studio Code 2019** qui vous permettra d'installer l'extension **Microsoft Visual C++ 2015-2019 Redistributable** correspondante. 
+- Exécutez les commandes suivantes à partir de la racine du projet :
+                
+**Étape 1.** Exécutez les commandes suivantes à partir de la racine du projet
+
+```console
+C\Users\Me\AutomaticLPDR> python -m venv gtp
+C\Users\Me\AutomaticLPDR> source gtp/bin/activate
+```
+**Étape 2** Dépend de la disponibilité d'un GPU dans votre machine :
+Si vous avez un GPU NVIDIA et que vous souhaitez l'utiliser :
+
+- Vérifiez que vous avez installé le Toolkit **CUDA** ainsi que **cuDNN**
+- Exécutez la commande suivante : 
+                
+**Attention** : Veillez bien à modifier les trois dernières lignes du fichier windows_gpu_requirements.txt pour indiquer la version de CUDA installée sur votre machine, par défaut nous considérons que vous disposez de CUDA 11.3**
+
+```bash
+(gtp) C\Users\Me\AutomaticLPDR> pip install -r requirements/windows_gpu_requirements.txt
+```
+
+Si vous **ne disposez pas** de GPU, ou que vous souhaitez utiliser votre CPU :
+- Exécutez la commande suivante : 
+
+```bash
+(gtp) C\Users\Me\AutomaticLPDR> pip install -r requirements/windows_cpu_requirements.txt
+```
+**Étape 3** : Pour finir, exécutez la commande suivante : 
+
+```bash
+(gtp) C\Users\Me\AutomaticLPDR> pip install -v -e recognition_module
+```
+
+Lorsque toutes les dépendances ont été correctement installées, il suffit de vous rendre dans le dossier de votre choix afin d'en tester les fonctionnalités.
