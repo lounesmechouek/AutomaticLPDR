@@ -1,21 +1,33 @@
-# Getting Started to lunch the server
+# API Gestion 
 
-''' Activating the environment '''
-> py -3 -m venv venv
-> venv\Scripts\activate
+# Principaux Services
 
-''' Install flask if not installed yet'''
->pip install Flask
+- Authentification : Contient tous les microservices permettant de s'authentifier à l'application mobile de manière sécurisée
+    
+    Exemple : microservice permettant de s'authentifier
 
-''' setting up the environment '''
-> set FLASK_APP=gtp_back
-> set FLASK_ENV=development
+    1. **Route** : /api/auth/login
+    2. **Type de requête** : 
+        - POST  
+        - **json data**
+        - (key1 : "username", type_value1 : String - Nom d'utilisateur)) 
+        - (key2 : "password", type_value2 : String - Mot de passe) 
+    3. **Réponse** : json (token, hashed_password, id, username)
 
-''' launching server '''
-> flask run
+- Gestion des plaques : Permet de récupérer les plaques scannées par l'utilisateur, de les ajouter et de les supprimer
 
-### Working Routes
+    Exemple : microservice de récupération de toutes les plaques d'un utilisateur
 
-" /register " to register a new user
-" /login " to login and get the token
-" /logout " 
+    1. **Route** : /api/plate/all
+    2. **Type de requête** : 
+        - GET  
+    3. **Réponse** : json
+
+- Gestion des scans : Permet de récupérer les scans effectués par l'utilisateur, de les ajouter et de les supprimer
+
+    Exemple : microservice de récupération de tous les scans d'un utilisateur
+
+    1. **Route** : /api/scan/all
+    2. **Type de requête** : 
+        - GET  
+    3. **Réponse** : json

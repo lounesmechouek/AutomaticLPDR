@@ -7,14 +7,15 @@ This folder has been cloned from the [YoloV5](https://github.com/ultralytics/yol
 L'approche utilisée pour l'apprentissage de notre module de détection de plaques dans diverses images en conditions réelles a consisté à utiliser le modèle de détection d'objet YOLOv5 en le ré-entrainant sur nos données. 
 
 ## **Remarque**
-Avant d'utiliser ce dossier, vérifiez que vous avez bien ajouté les poids du modèle dans le dossier "models/alpr". Si vous souhaitez utiliser les poids que nous avons obtenus lors de l'apprentissage, ils sont disponibles à ce lien : https://drive.google.com/drive/folders/1l7hYrcaZ5kwJLE7t-e4U2992W9zd0H8O?usp=sharing
+Avant d'utiliser ce dossier, vérifiez que vous avez bien ajouté les poids du modèle dans le dossier "models/alpr". Si vous souhaitez utiliser les poids que nous avons obtenus suite à notre apprentissage, ils sont disponibles à ce lien : https://drive.google.com/drive/folders/1l7hYrcaZ5kwJLE7t-e4U2992W9zd0H8O?usp=sharing
 
 
 ## Effectuer une détection (inference)
-En supposant que image.jpg se trouve dans le dossier courant :
+- Vérifiez que l'environnement virtuel gtp est bien activé (présence de (gtp) dans le terminal)
+- En supposant que image.jpg se trouve dans le dossier courant :
 
 ```console
-"../gtp/Scripts/python.exe" ./detect.py --weights ./models/alpr/detection_weights.pt --source ./image.jpg  --save-crop --iou-thres 0.5 --project results --name image --data ./data/license_plates.yaml
+(gtp) python detect.py --weights ./models/alpr/detection_weights.pt --source ./image.jpg  --save-crop --iou-thres 0.5 --project results --name image --data ./data/license_plates.yaml
 ```
 
 ## Ré-entraîner le modèle
@@ -24,7 +25,7 @@ En supposant que image.jpg se trouve dans le dossier courant :
 - Mettre le dossier "license_plate" (contenu dans vehicles) au niveau du répertoire courant.
 
 ```console
-"../gtp/Scripts/python.exe" ./train.py --batch 1 --epochs 30 --data ./data/license_plates.yaml --cfg ./models/yolov5s.yaml --weights yolov5s.pt --name yolov5s_alpr --cache
+(gtp) python train.py --batch 1 --epochs 30 --data ./data/license_plates.yaml --cfg ./models/yolov5s.yaml --weights yolov5s.pt --name yolov5s_alpr --cache
 ```
 
 Remarque : Vous trouverez les fichiers yolov5s.yaml et yolov5s.pt sur le répertoire github YOLOv5.
@@ -40,5 +41,5 @@ Afin de vérifier les performances que nous avons affichées, vous pouvez procé
 - Mettre le dossier "license_plate" (contenu dans vehicles) au niveau du répertoire courant.
 
 ```console
-"../gtp/Scripts/python.exe" ./val.py --data ./data/license_plates.yaml --weights models/alpr/detection_weights.pt --task test
+(gtp) python val.py --data ./data/license_plates.yaml --weights models/alpr/detection_weights.pt --task test
 ```

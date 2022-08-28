@@ -9,7 +9,6 @@ tqdm>=4.64.0
 protobuf<4.21.3 
 pandas>=1.1.4
 seaborn>=0.11.0
-#tensorflow
 tensorboard>=2.4.1
 thop>=0.1.1
 psutil
@@ -36,5 +35,6 @@ mmdet
 Flask
 Flask-JWT-Extended
 Flask-SQLAlchemy
-#torch>=1.7.0
-#torchvision>=0.8.1
+https://download.pytorch.org/whl/cpu/torch-1.11.0%2Bcpu-cp39-cp39-win_amd64.whl
+https://download.pytorch.org/whl/cpu/torchvision-0.12.0%2Bcpu-cp39-cp39-win_amd64.whl
+https://download.openmmlab.com/mmcv/dist/cpu/torch1.11.0/mmcv_full-1.6.0-cp39-cp39-win_amd64.whl
