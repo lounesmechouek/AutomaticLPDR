@@ -28,7 +28,7 @@ Si vous souhaitez utiliser une API en local, il suffit de lancer cette dernière
 (gtp) flask run --port 8081
 ```
 
-Les deux API sont alors accessibles respectivement sur les port 5000 et 8081.
+Les deux API sont alors accessibles respectivement sur les ports 5000 et 8081.
 
 ## Déploiement
 Les API sont déployées sur un serveur GCP et accessibles à l'adresse suivante : http://35.232.72.59

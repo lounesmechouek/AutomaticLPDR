@@ -39,7 +39,7 @@ Si vous avez un GPU NVIDIA et que vous souhaitez l'utiliser :
 - Vérifiez que vous avez installé le Toolkit **CUDA** ainsi que **cuDNN**
 - Exécutez la commande suivante : 
                 
-**Attention** : Veillez bien à modifier les trois dernières lignes du fichier windows_gpu_requirements.txt pour indiquer la version de CUDA installée sur votre machine, par défaut nous considérons que vous disposez de CUDA 11.3**
+**Attention** : Veillez bien à modifier les trois dernières lignes du fichier linux_gpu_requirements.txt pour indiquer la version de CUDA installée sur votre machine, par défaut nous considérons que vous disposez de **CUDA 11.3**
 
 ```bash
 (gtp) user@DESKTOP:~/AutomaticLPDR$ pip install -r requirements/linux_gpu_requirements.txt
@@ -49,7 +49,7 @@ Si vous **ne disposez pas** de GPU, ou que vous souhaitez utiliser votre CPU :
         - Exécutez la commande suivante : 
 
 ```bash
-    (gtp) user@DESKTOP:~/AutomaticLPDR$ pip install -r requirements/linux_cpu_requirements.txt
+(gtp) user@DESKTOP:~/AutomaticLPDR$ pip install -r requirements/linux_cpu_requirements.txt
 ```
 **Étape 3** : Pour finir, exécutez la commande suivante : 
 
