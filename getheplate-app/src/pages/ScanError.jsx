@@ -12,10 +12,7 @@ import FloatingColorButton from '../components/FloatingColorButton'
 
 const ScanError = ({navigation ,route}) => {
     const { photo , error } = route.params
-    const backHome = () => navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home' }],
-    })
+    const backHome = () => navigation.replace('Home')
     
     return (
         <SafeAreaView style={[Style.container,{

@@ -30,7 +30,6 @@ const Home = ({navigation}) => {
     setScans(scans.map(elt => elt.id==scan.id  ? scan : elt))
   }
 
-  //shd add delete
 
   return (
     <SafeAreaView style={Style.container}>

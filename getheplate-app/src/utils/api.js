@@ -79,10 +79,14 @@ export const api = {
 
 export const response = res => {
     return new Promise((resolve,reject) =>{
-        if(res.success)
-            return resolve(res.data)
+        if(!!res)
+            if(res.success)
+                return resolve(res.data)
+            else
+             return reject(res)
         else 
-            reject(res.response)
+            return reject(res)
+
     })
 }
 

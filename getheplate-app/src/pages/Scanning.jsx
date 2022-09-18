@@ -28,7 +28,7 @@ const Scanning = ({navigation ,route}) => {
                     navigation.navigate('ScanError',{ photo , error : Strings.alerts.noDetection , other : err})
             })
 
-    useEffect(() => {ModelCall()}, [loading])
+    useEffect(() => {ModelCall()}, [])
     
     return (
         <SafeAreaView style={[Style.container,{

@@ -10,29 +10,18 @@ import FloatingColorButton from '../components/FloatingColorButton'
 import Model from '../model'
 
 const ScanResult = ({navigation ,route}) => {
-    const {scanResult , photo } = route.params    
-    const [saved, setsaved] = useState(false)
-
-    useEffect(() => {
-      saved 
-      ? deleteScan()
-      : setsaved (false)
-    }, [saved])
-    
+    const {scanResult , photo } = route.params   
+    const [loading,setLoading] = useState(false);
     const deleteScan = () => {
         // This API is not working for deletion PROVIDER PROBLEM
         // Model.DeletePhotoLink(photo.delete_url)
-        
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Home' }],
-        })
-        
+        navigation.replace('Home')
     }
 
     // TODO : Fix the loop back navigation
-    const saveScan = async () => {
-        await Model.saveScan({
+    const saveScan = () => {
+        setLoading(true)
+        Model.saveScan({
             "file_name_link" : photo.url,
             "longitude" : 3.042048, // Algeirs default
             "latitude" : 36.752887,
@@ -41,11 +30,10 @@ const ScanResult = ({navigation ,route}) => {
             "note" : "",
             "accuracy" : scanResult.score
         })
-        setsaved(true)
-        navigation.reset({
-            index: 1,
-            routes: [{ name: 'Home' }],
-        })
+        .then(() => navigation.replace('Home'))
+        .catch(err => console.log(err))
+        .finally(()=> setLoading(false))
+        
     }
 
     return (
@@ -64,7 +52,7 @@ const ScanResult = ({navigation ,route}) => {
             <ImageHolder image_url={photo.url} />
             <View style={Style.floating_box_ctn_2}>
                 <FloatingColorButton title={Strings.button.nosave} type="cancel" textColor="dark_grey" noShadow={true} color='light_grey' onPress={deleteScan}/>
-                <FloatingColorButton title={Strings.button.save} type="save" color='blue' onPress={saveScan}/>
+                <FloatingColorButton title={Strings.button.save} type="save" color='blue' disabeled={loading} onPress={saveScan}/>
             </View>
         </SafeAreaView>
     )

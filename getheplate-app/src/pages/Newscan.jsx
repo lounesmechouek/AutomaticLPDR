@@ -52,7 +52,7 @@ const NewScan = ({navigation}) => {
     if (!result.cancelled) {
       getLink(result.base64)
       .then( photoLink => {
-        navigation.navigate('BeforeScan',{
+        navigation.replace('BeforeScan',{
           photo : { ...photoLink.data , ...photoLink.delete_url },
           ...geoloc 
         })

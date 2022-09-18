@@ -16,7 +16,7 @@ import ImageHolder from '../components/ImageHolder';
 const BeforeScan = ({navigation , route }) => {
     const { photo , geoloc} = route.params 
     const launchDetect =()=>{
-        navigation.navigate('Scanning',{
+        navigation.replace('Scanning',{
             photo
         })
     }

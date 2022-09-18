@@ -9,12 +9,11 @@ import Model from '../model';
 const Splash = ({ navigation }) => {
 
     useEffect(() => {
-        //Simulating a check
         Model.verifLogin()
         .then(res => navigation.reset({
             index: 0,
             routes: [{ name: 'Home' }],
-            }) // TODO : save persstent user_id
+            })
         )
         .catch(err => navigation.reset({
             index: 0,
