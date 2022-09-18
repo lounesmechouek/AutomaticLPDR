@@ -19,7 +19,7 @@ class User(db.Model):
 class Photo(db.Model):
     __tablename__ = 'photo'
     id = db.Column(db.Integer, primary_key=True)
-    file_name_link = db.Column(db.String(80), unique=True, nullable=False)
+    file_name_link = db.Column(db.String(80), nullable=False)
     is_labeled = db.Column(db.Boolean,default=False, nullable=False)
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
