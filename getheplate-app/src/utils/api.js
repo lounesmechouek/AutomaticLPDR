@@ -77,14 +77,12 @@ export const api = {
     ,
 }
 
-export const response = res =>{
+export const response = res => {
     return new Promise((resolve,reject) =>{
         if(res.success)
             return resolve(res.data)
-        else if(!!res.error)
-            reject(res.error)
-        else
-            reject(res.msg) 
+        else 
+            reject(res.response)
     })
 }
 

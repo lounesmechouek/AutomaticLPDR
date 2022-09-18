@@ -10,7 +10,7 @@ import Strings from '../strings'
 import Style from '../styles'
 
 const Home = ({navigation}) => {
-  NavigationBar.setBackgroundColorAsync("white");
+  // NavigationBar.setBackgroundColorAsync("white");
   const [scans, setScans] = useState([])
   const newScan = () => {
     navigation.navigate("NewScan")

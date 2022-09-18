@@ -12,15 +12,23 @@ import {Model} from '../model'
 const Scanning = ({navigation ,route}) => {
     const { photo } = route.params
     const [loading, setLoading] = useState(true)
-    useEffect(() => {
-            Model.Scan(photo.url)
+
+    const ModelCall = () => 
+        Model.Scan(photo.url)
             .then( res => {
                 setLoading(false)
                 navigation.navigate('ScanResult',{ scanResult : res , photo })
             })
-            .catch ( err => navigation.navigate('ScanError',{ photo , error : Strings.alerts.noDetection , other : err}))
-        }
-    , [loading])
+            .catch ( err => {
+                if (err.status === 501) // retry on busy server
+                    setTimeout(() => {
+                        ModelCall();
+                    }, 2000);
+                else
+                    navigation.navigate('ScanError',{ photo , error : Strings.alerts.noDetection , other : err})
+            })
+
+    useEffect(() => {ModelCall()}, [loading])
     
     return (
         <SafeAreaView style={[Style.container,{
