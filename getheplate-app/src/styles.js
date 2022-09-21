@@ -28,6 +28,13 @@ const Style = StyleSheet.create({
       shadowRadius: 10,
       elevation: 2,
     },
+    noscan : {
+      fontFamily: 'Quantico',
+      marginTop : 'auto',
+      color : Colors.grey ,
+      marginHorizontal : '10%',
+      textAlign : 'center'
+    },
     formHolder :{
       backgroundColor : Colors.grey,
       borderRadius : 20,

@@ -10,15 +10,9 @@ const Splash = ({ navigation }) => {
 
     useEffect(() => {
         Model.verifLogin()
-        .then(res => navigation.reset({
-            index: 0,
-            routes: [{ name: 'Home' }],
-            })
+        .then(res => {console.log(res);navigation.replace('Home')}
         )
-        .catch(err => navigation.reset({
-            index: 0,
-            routes: [{ name: 'Login' }],
-            })
+        .catch(err =>{console.log(res);navigation.replace('Login')}
         )
     },[])
     

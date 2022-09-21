@@ -17,7 +17,7 @@ const Scanning = ({navigation ,route}) => {
         Model.Scan(photo.url)
             .then( res => {
                 setLoading(false)
-                navigation.navigate('ScanResult',{ scanResult : res , photo })
+                navigation.replace('ScanResult',{ scanResult : res , photo })
             })
             .catch ( err => {
                 if (err.status === 501) // retry on busy server
@@ -25,7 +25,7 @@ const Scanning = ({navigation ,route}) => {
                         ModelCall();
                     }, 2000);
                 else
-                    navigation.navigate('ScanError',{ photo , error : Strings.alerts.noDetection , other : err})
+                    navigation.replace('ScanError',{ photo , error : Strings.alerts.noDetection , other : err})
             })
 
     useEffect(() => {ModelCall()}, [])

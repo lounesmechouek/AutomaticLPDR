@@ -36,14 +36,14 @@ const strings = {
             youPlates : "Vos Plaques",
             precision : "Précision",
             took_at : "Prise le",
-            noscan : "Aucun scan trouvé"
+            noscan : "Il semblerai que vous n'ayez effectué aucun scan pour le moment."
         },
         addScan : {
             option : "Veuillez sélectionner l’une des options suivantes"
         },
         alerts :{
             beforeScan : "Les résultats seront plus précis avec une image de bonne qualité et une plaque bien lisible.",
-            scanning : "Nous utilisons des algorithmes de deep learning pour reconnaitre les plaques d’immatrictulation",
+            scanning : "Nous utilisons des algorithmes de deep learning pour reconnaitre les plaques d’immatriculation",
             noDetection : "Aucune plaque n’a été localisée dans l’image !", 
             errorScan : "Un problème est survenu lors du processus de reconnaissance"
         },
