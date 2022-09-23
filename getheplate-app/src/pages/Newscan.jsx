@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View ,Text , FlatList, SafeAreaView ,StatusBar} from 'react-native'
+import { View ,Text , FlatList, SafeAreaView ,StatusBar, ActivityIndicator} from 'react-native'
 import Svg from 'react-native-svg-uri'
 import { Mock } from '../../tests/mocks'
 import { assets } from '../assets/importer'
@@ -17,7 +17,7 @@ import { storage } from '../utils/storage'
 
 const NewScan = ({navigation}) => {
   const [geoloc, setGeoloc] = useState({lat:null,lon:null})
-  
+  const [loading,setLoading] = useState(false)
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -49,9 +49,11 @@ const NewScan = ({navigation}) => {
   }
 
   const loadedPic = result =>{
+    setLoading(true);
     if (!result.cancelled) {
       getLink(result.base64)
       .then( photoLink => {
+        setLoading(false)
         navigation.replace('BeforeScan',{
           photo : { ...photoLink.data , ...photoLink.delete_url },
           ...geoloc 
@@ -68,6 +70,15 @@ const NewScan = ({navigation}) => {
         hidden={true} 
         />
       <View><Text style ={{color : Colors.white}} onPress={disconnect} >disconnect</Text></View>
+        {
+          loading ? 
+          <ActivityIndicator 
+                    animating ={loading}
+                    size="large" 
+                    color={Colors.dark_grey}   
+                    hidesWhenStopped={true} />
+          : null
+        }
         <View style={Style.formHolder} >
             <Svg 
                 source={assets.car}
@@ -86,10 +97,10 @@ const NewScan = ({navigation}) => {
                 {Strings.addScan.option}
             </Text>
             <View style={[Style.container_23,{marginBottom : 0}]}>
-              <VerticalButton title={Strings.button.getFromGallery} type="import" color="dark_grey" textColor="white" fill={Colors.white} onPress={pickImage}/>
-              <VerticalButton title={Strings.button.takePhoto} type="camera" color="dark_grey" textColor="white" fill={Colors.white} onPress={takeImage}/>
+              <VerticalButton title={Strings.button.getFromGallery} type="import" color="dark_grey" textColor="white" fill={Colors.white} onPress={pickImage} disabled={loading} />
+              <VerticalButton title={Strings.button.takePhoto} type="camera" color="dark_grey" textColor="white" fill={Colors.white} onPress={takeImage} disabled={loading} />
             </View>
-            <DarkButton title={Strings.button.cancel} onPress={navigation.goBack}/>
+            <DarkButton title={Strings.button.cancel} onPress={navigation.goBack} disabled={loading}  />
         </View>
     </SafeAreaView>
   )
