@@ -53,8 +53,10 @@ const ScanPage = ({ route , navigation }) => {
                 <Text style={[Style.scanItemTexts,{marginBottom : 0}]}>{addr}</Text>
             </View>
             <View style={Style.container_23}>
-                <LineColorButton title={Strings.button.addNote} type="add_small" /> 
-                <LineColorButton type="plate_small"  fill={marked ? Colors.red :Colors.dark_grey } onPress={toggleMark}/>
+                {
+                    marked ? <LineColorButton type="plate_small" title={Strings.button.unmark}  fill={Colors.red} textColor="red" onPress={toggleMark}/>
+                    : <LineColorButton type="plate_small" title={ Strings.button.mark}  fill={Colors.dark_grey} textColor="dark_grey" onPress={toggleMark}/>
+                }
             </View>
             <FlatList
                 data={photos}
