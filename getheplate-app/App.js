@@ -14,6 +14,8 @@ import ScanResult from './src/pages/ScanResult';
 import ScanError from './src/pages/ScanError';
 
 const Stack = createStackNavigator()
+// disable warnings
+console.disableYellowBox = true;
 
 export default function App() {
   const [loaded] = useFonts({

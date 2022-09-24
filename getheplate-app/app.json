@@ -3,7 +3,7 @@
     "name": "getheplate-app",
     "slug": "gettheplate-app",
     "owner": "badido",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -31,10 +31,19 @@
       }
     },
     "android": {
+      "useNextNotificationsApi": true,
+      "package": "com.rn_wp.android",
       "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "NOTIFICATIONS",
         "android.permission.RECORD_AUDIO"
-      ],
-      "package": "com.badido.gettheplateapp"
+      ]
+    },
+    "ios": {
+    },
+    "updates": {
+      "url": "https://u.expo.dev/37463fad-5584-470c-8b8c-2707765e8bda"
     }
   }
 }

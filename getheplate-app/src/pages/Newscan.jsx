@@ -23,7 +23,6 @@ const NewScan = ({navigation}) => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       base64 : true,
-      aspect: [16, 9],
       quality: 0.2,
     });
     loadedPic(result)
@@ -33,7 +32,6 @@ const NewScan = ({navigation}) => {
     await ImagePicker.requestCameraPermissionsAsync()
     let result = await ImagePicker.launchCameraAsync ({
       allowsEditing: true,
-      aspect: [16, 9],
       base64 : true,
       quality: 0.2,
     });
@@ -53,14 +51,15 @@ const NewScan = ({navigation}) => {
     if (!result.cancelled) {
       getLink(result.base64)
       .then( photoLink => {
-        setLoading(false)
         navigation.replace('BeforeScan',{
           photo : { ...photoLink.data , ...photoLink.delete_url },
           ...geoloc 
         })
       })
-      .catch(err => console.log(err))
+      .catch(()=> setLoading(false))
     }
+    else
+      setLoading(false)
   }
 
   return (

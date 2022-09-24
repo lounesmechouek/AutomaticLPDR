@@ -13,11 +13,16 @@
       }
     },
     "preview": {
+      "distribution": "internal",
       "android": {
         "buildType": "apk"
       }
     },
-    "production": {}
+    "production": {
+      "android": {
+          "buildType": "apk"
+      }
+    }
   },
   "submit": {
     "production": {}

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>EXUpdatesSDKVersion</key>
-    <string>46.0.0</string>
     <key>EXUpdatesURL</key>
     <string>https://exp.host/@badido/gettheplate-app</string>
     <key>EXUpdatesEnabled</key>
@@ -14,5 +12,7 @@
     <integer>0</integer>
     <key>EXUpdatesReleaseChannel</key>
     <string>default</string>
+    <key>EXUpdatesRuntimeVersion</key>
+    <string>1.0.0</string>
   </dict>
 </plist>
